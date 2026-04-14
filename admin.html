@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🍳 Recipe Book Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #0e2a1a 100%);
+            min-height: 100vh;
+            padding: 16px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
+            padding: 20px 16px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        
+        .header p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #2d6a4f;
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #2d6a4f;
+            margin-bottom: 6px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2d6a4f;
+        }
+        
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .theme-btn {
+            padding: 12px 8px;
+            border: none;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            transition: all 0.2s;
+        }
+        
+        .theme-btn.active {
+            outline: 3px solid #ffd966;
+            transform: scale(1.02);
+        }
+        
+        .theme-btn.green { background: #2d6a4f; }
+        .theme-btn.purple { background: #6c3483; }
+        .theme-btn.blue { background: #1a5f7a; }
+        .theme-btn.orange { background: #e67e22; }
+        .theme-btn.dark { background: #1e1e2f; }
+        .theme-btn.pink { background: #c0395e; }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .toggle-group label {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .toggle-switch {
+            width: 50px;
+            height: 26px;
+            background: #ccc;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .toggle-switch.active {
+            background: #2d6a4f;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+        
+        .toggle-switch.active::after {
+            left: 26px;
+        }
+        
+        .save-btn {
+            background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+        
+        .save-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 12px;
+            text-align: center;
+            font-size: 13px;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        .preview-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            background: rgba(255,255,255,0.2);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .category-list {
+            margin-top: 8px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+        }
+        
+        .category-item input {
+            flex: 1;
+            margin: 0;
+        }
+        
+        .btn-small {
+            padding: 8px 12px;
+            background: #40916c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .btn-remove {
+            background: #dc3545;
+        }
+        
+        .btn-add {
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .section-content.open {
+            max-height: 800px;
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .arrow.open {
+            transform: rotate(180deg);
+        }
+        
+        .bulk-import-area {
+            margin-top: 15px;
+        }
+        
+        .bulk-import-area textarea {
+            min-height: 150px;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .stat-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d6a4f;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍳 Recipe Book Admin</h1>
+            <p>Customize your recipe app without touching code</p>
+        </div>
+        
+        <div id="messageBox" class="message"></div>
+        
+        <!-- App Info Card -->
+        <div class="card">
+            <h2>📱 App Information</h2>
+            <div class="form-group">
+                <label>App Title</label>
+                <input type="text" id="appTitle" placeholder="CHEF'S RECIPE BOOK">
+            </div>
+            <div class="form-group">
+                <label>Chef Name</label>
+                <input type="text" id="chefName" placeholder="Chef Priscilla">
+            </div>
+            <div class="form-group">
+                <label>Default Recipe Image URL</label>
+                <input type="text" id="defaultImage" placeholder="https://...">
+            </div>
+        </div>
+        
+        <!-- Theme Card -->
+        <div class="card">
+            <h2>🎨 App Theme</h2>
+            <div class="theme-grid" id="themeSelector">
+                <button class="theme-btn green" data-theme="green">🌿 Green</button>
+                <button class="theme-btn purple" data-theme="purple">👑 Purple</button>
+                <button class="theme-btn blue" data-theme="blue">🌊 Blue</button>
+                <button class="theme-btn orange" data-theme="orange">🌅 Orange</button>
+                <button class="theme-btn dark" data-theme="dark">🌙 Dark</button>
+                <button class="theme-btn pink" data-theme="pink">🌸 Pink</button>
+            </div>
+            <div class="form-group" style="margin-top: 15px;">
+                <label>Background Image URL</label>
+                <input type="text" id="backgroundImage" placeholder="https://...">
+            </div>
+        </div>
+        
+        <!-- Categories Card -->
+        <div class="card">
+            <h2>📂 Recipe Categories</h2>
+            <div id="categoryList" class="category-list"></div>
+            <button class="btn-small btn-add" onclick="addCategory()">➕ Add Category</button>
+            <p style="font-size: 10px; color: #999; margin-top: 10px;">
+                Categories help organize your recipes
+            </p>
+        </div>
+        
+        <!-- Features Card -->
+        <div class="card">
+            <h2>🔧 Features</h2>
+            <div class="toggle-group">
+                <label>⭐ Favorites</label>
+                <div class="toggle-switch" id="toggleFavorites" onclick="toggleFeature('favorites')"></div>
+            </div>
+            <div class="toggle-group">
+                <label>🔍 Search</label>
+                <div class="toggle-switch" id="toggleSearch" onclick="toggleFeature('search')"></div>
+            </div>
+            <div class="toggle-group">
+                <label>🔊 Sound Effects</label>
+                <div class="toggle-switch" id="toggleSound" onclick="toggleFeature('soundEffects')"></div>
+            </div>
+            <div class="toggle-group">
+                <label>🌙 Dark Mode Default</label>
+                <div class="toggle-switch" id="toggleDarkMode" onclick="toggleFeature('darkMode')"></div>
+            </div>
+        </div>
+        
+        <!-- Bulk Import Card (Collapsible) -->
+        <div class="card">
+            <div class="section-header" onclick="toggleSection('importSection')">
+                <h2 style="border: none; margin: 0; padding: 0;">📦 Bulk Import Recipes</h2>
+                <span class="arrow" id="importArrow">▼</span>
+            </div>
+            <div class="section-content" id="importSection">
+                <p style="font-size: 12px; color: #666; margin-bottom: 10px;">
+                    Paste recipe batches here to add multiple recipes at once
+                </p>
+                <div class="bulk-import-area">
+                    <textarea id="bulkRecipes" placeholder="Paste recipe JSON array here..."></textarea>
+                </div>
+                <button class="btn-small" style="margin-top: 10px; width: 100%;" onclick="importBulkRecipes()">
+                    📥 Import Recipes
+                </button>
+                <p style="font-size: 10px; color: #999; margin-top: 8px;">
+                    Format: [{"name": "Recipe", "category": "Dinner", ...}, ...]
+                </p>
+            </div>
+        </div>
+        
+        <!-- Stats Card -->
+        <div class="card">
+            <h2>📊 Recipe Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalRecipes">0</div>
+                    <div class="stat-label">Total Recipes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="kenyanRecipes">0</div>
+                    <div class="stat-label">Kenyan Dishes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="favoriteCount">0</div>
+                    <div class="stat-label">Favorites</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Save Button -->
+        <button class="save-btn" onclick="saveAllSettings()">💾 SAVE ALL CHANGES</button>
+        
+        <!-- Link to Main App -->
+        <a href="index.html" class="preview-link">👨‍🍳 Open Recipe Book →</a>
+        
+        <div style="text-align: center; margin-top: 20px; color: rgba(255,255,255,0.7); font-size: 11px;">
+            Changes save to config.js • App updates automatically
+        </div>
+    </div>
+
+    <script>
+        // Current settings
+        let currentConfig = {
+            appTitle: "👨‍🍳 CHEF'S RECIPE BOOK",
+            chefName: "Chef Priscilla",
+            theme: "green",
+            backgroundImage: "https://i.pinimg.com/736x/8c/e3/5d/8ce35dba6a905798cc7aac1614f0cd79.jpg",
+            defaultRecipeImage: "https://i.pinimg.com/736x/fc/04/ae/fc04aeee22cbce1229a93dd3d0e1eefa.jpg",
+            categories: [
+                "🇰🇪 Kenyan Classics",
+                "🇰🇪 Kenyan Stews", 
+                "🇰🇪 Street Food",
+                "🍳 Breakfast",
+                "🥗 Lunch",
+                "🍝 Dinner",
+                "🍰 Desserts",
+                "🇮🇹 Italian",
+                "🇮🇳 Indian",
+                "🇨🇳 Asian",
+                "🍲 Soups",
+                "🌱 Vegetarian"
+            ],
+            features: {
+                favorites: true,
+                search: true,
+                soundEffects: true,
+                darkMode: false
+            }
+        };
+        
+        // Load from localStorage
+        function loadConfig() {
+            const saved = localStorage.getItem('recipe_admin_config');
+            if (saved) {
+                try {
+                    currentConfig = JSON.parse(saved);
+                } catch(e) {}
+            }
+            
+            document.getElementById('appTitle').value = currentConfig.appTitle;
+            document.getElementById('chefName').value = currentConfig.chefName;
+            document.getElementById('backgroundImage').value = currentConfig.backgroundImage;
+            document.getElementById('defaultImage').value = currentConfig.defaultRecipeImage;
+            
+            // Theme
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === currentConfig.theme) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Features
+            updateToggleUI('favorites', currentConfig.features.favorites);
+            updateToggleUI('search', currentConfig.features.search);
+            updateToggleUI('sound', currentConfig.features.soundEffects);
+            updateToggleUI('darkMode', currentConfig.features.darkMode);
+            
+            renderCategories();
+            updateStats();
+        }
+        
+        function updateToggleUI(feature, value) {
+            const toggle = document.getElementById(`toggle${feature.charAt(0).toUpperCase() + feature.slice(1)}`);
+            if (toggle) {
+                value ? toggle.classList.add('active') : toggle.classList.remove('active');
+            }
+        }
+        
+        function toggleFeature(feature) {
+            currentConfig.features[feature] = !currentConfig.features[feature];
+            updateToggleUI(feature, currentConfig.features[feature]);
+        }
+        
+        function renderCategories() {
+            const container = document.getElementById('categoryList');
+            let html = '';
+            
+            currentConfig.categories.forEach((cat, index) => {
+                html += `
+                    <div class="category-item">
+                        <input type="text" value="${cat}" data-index="${index}" onchange="updateCategory(${index}, this.value)">
+                        <button class="btn-small btn-remove" onclick="removeCategory(${index})">✖</button>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html || '<p style="color: #999; font-size: 12px;">No categories yet. Add one!</p>';
+        }
+        
+        function updateCategory(index, value) {
+            currentConfig.categories[index] = value;
+        }
+        
+        function addCategory() {
+            currentConfig.categories.push('New Category');
+            renderCategories();
+        }
+        
+        function removeCategory(index) {
+            currentConfig.categories.splice(index, 1);
+            renderCategories();
+        }
+        
+        // Theme selection
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentConfig.theme = this.dataset.theme;
+            });
+        });
+        
+        // Input listeners
+        document.getElementById('appTitle').addEventListener('input', function() {
+            currentConfig.appTitle = this.value;
+        });
+        
+        document.getElementById('chefName').addEventListener('input', function() {
+            currentConfig.chefName = this.value;
+        });
+        
+        document.getElementById('backgroundImage').addEventListener('input', function() {
+            currentConfig.backgroundImage = this.value;
+        });
+        
+        document.getElementById('defaultImage').addEventListener('input', function() {
+            currentConfig.defaultRecipeImage = this.value;
+        });
+        
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const arrow = document.getElementById('importArrow');
+            
+            if (section.classList.contains('open')) {
+                section.classList.remove('open');
+                arrow.classList.remove('open');
+                section.style.maxHeight = '0';
+            } else {
+                section.classList.add('open');
+                arrow.classList.add('open');
+                section.style.maxHeight = section.scrollHeight + 'px';
+            }
+        }
+        
+        function updateStats() {
+            // Get recipes from localStorage
+            const customRecipes = JSON.parse(localStorage.getItem('chef_custom_recipes')) || [];
+            const favorites = JSON.parse(localStorage.getItem('chef_favorites')) || [];
+            
+            // Count Kenyan recipes (categories containing "Kenyan")
+            const kenyanCount = customRecipes.filter(r => 
+                r.category && r.category.toLowerCase().includes('kenyan')
+            ).length;
+            
+            document.getElementById('totalRecipes').innerHTML = customRecipes.length;
+            document.getElementById('kenyanRecipes').innerHTML = kenyanCount;
+            document.getElementById('favoriteCount').innerHTML = favorites.length;
+        }
+        
+        function importBulkRecipes() {
+            const text = document.getElementById('bulkRecipes').value.trim();
+            if (!text) {
+                alert('Please paste recipe data first!');
+                return;
+            }
+            
+            try {
+                const newRecipes = JSON.parse(text);
+                if (!Array.isArray(newRecipes)) {
+                    throw new Error('Data must be an array');
+                }
+                
+                // Add IDs if missing
+                newRecipes.forEach((r, i) => {
+                    if (!r.id) r.id = 'bulk_' + Date.now() + i;
+                });
+                
+                // Get existing custom recipes
+                let customRecipes = JSON.parse(localStorage.getItem('chef_custom_recipes')) || [];
+                customRecipes = [...customRecipes, ...newRecipes];
+                
+                localStorage.setItem('chef_custom_recipes', JSON.stringify(customRecipes));
+                
+                showMessage(`✅ Imported ${newRecipes.length} recipes successfully!`, 'success');
+                document.getElementById('bulkRecipes').value = '';
+                updateStats();
+            } catch(e) {
+                showMessage('❌ Invalid JSON format. Please check your data.', 'error');
+            }
+        }
+        
+        function showMessage(text, type) {
+            const box = document.getElementById('messageBox');
+            box.textContent = text;
+            box.className = 'message ' + type;
+            
+            setTimeout(() => {
+                box.className = 'message';
+            }, 4000);
+        }
+        
+        function generateConfigFile() {
+            return `// Chef's Recipe Book - Configuration File
+// Last updated: ${new Date().toLocaleString()}
+const APP_CONFIG = {
+  appTitle: "${currentConfig.appTitle}",
+  chefName: "${currentConfig.chefName}",
+  theme: "${currentConfig.theme}",
+  backgroundImage: "${currentConfig.backgroundImage}",
+  defaultRecipeImage: "${currentConfig.defaultRecipeImage}",
+  categories: ${JSON.stringify(currentConfig.categories, null, 2)},
+  features: ${JSON.stringify(currentConfig.features, null, 2)}
+};`;
+        }
+        
+        function saveAllSettings() {
+            // Save to localStorage
+            localStorage.setItem('recipe_admin_config', JSON.stringify(currentConfig));
+            
+            // Generate and download config file
+            const configContent = generateConfigFile();
+            const blob = new Blob([configContent], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'config.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('✅ Settings saved! Replace config.js in GitHub with the downloaded file.', 'success');
+            
+            setTimeout(() => {
+                alert('📁 HOW TO APPLY:\n\n1. The config.js file has been downloaded\n2. Go to your GitHub repository\n3. Delete the old config.js\n4. Upload this new config.js\n5. App updates in 1-2 minutes!');
+            }, 500);
+        }
+        
+        // Initialize
+        loadConfig();
+        
+        // Global functions
+        window.toggleSection = toggleSection;
+        window.toggleFeature = toggleFeature;
+        window.addCategory = addCategory;
+        window.removeCategory = removeCategory;
+        window.updateCategory = updateCategory;
+        window.importBulkRecipes = importBulkRecipes;
+        window.saveAllSettings = saveAllSettings;
+    </script>
+</body>
+</html>

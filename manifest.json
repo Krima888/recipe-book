@@ -1,0 +1,16 @@
+{
+  "name": "Chef's Recipe Book",
+  "short_name": "Recipes",
+  "description": "1,000+ Recipes with Kenyan Dishes",
+  "start_url": "/recipe-book/",
+  "display": "standalone",
+  "background_color": "#2d6a4f",
+  "theme_color": "#2d6a4f",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1830/1830839.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

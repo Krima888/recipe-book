@@ -1,663 +1,434 @@
-// ============================================
-// 👨‍🍳 CHEF'S RECIPE BOOK - COMPLETE COLLECTION
-// 57 Detailed Recipes with Professional Instructions
-// Simply copy this entire file and replace your recipes-database.js
-// ============================================
 
-const RECIPE_DATABASE = [
-  
-  // ==========================================
-  // 🇰🇪 KENYAN CLASSICS (10 recipes)
-  // ==========================================
-  
-  {
-    id: "ken001",
-    name: "Ugali (Kenyan Cornmeal Staple)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
-    prepTime: "5 min",
-    cookTime: "15 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Heavy-bottomed sufuria", "Wooden spoon (mwiko)", "Measuring cups", "Serving plate"],
-    ingredients: ["4 cups water", "2 cups maize flour (cornmeal)", "1/2 tsp salt"],
-    instructions: [
-      "BOIL WATER: Place sufuria over high heat. Add salt. Wait until LARGE ROLLING BUBBLES appear (5-7 minutes)",
-      "ADD FLOUR: Reduce heat to medium. Pour flour in THIN STEADY STREAM while stirring VIGOROUSLY. DO NOT dump all at once",
-      "BEAT LUMPS: As mixture thickens, press ugali against pot sides with flat edge of mwiko to break up lumps",
-      "REDUCE HEAT: Once incorporated, reduce to LOW. Gather into center, press down, cover slightly ajar. Cook 8-10 minutes",
-      "CHECK DONENESS: Ugali is ready when it PULLS AWAY CLEANLY from sides and mwiko stands upright in center",
-      "TURN OUT: Wet serving plate. Invert pot quickly. Shape into smooth dome with wet hands",
-      "SERVE IMMEDIATELY: Ugali must be PIPING HOT"
-    ],
-    chefTips: ["Water MUST be at rolling boil before adding flour", "Wet hands to prevent sticking", "Sift flour for extra smooth ugali"],
-    pairingSuggestions: ["Nyama Choma", "Sukuma Wiki", "Fried tilapia", "Beef stew"],
-    isFavorite: false,
-    tags: ["staple", "traditional", "quick", "kenyan"]
-  },
-  
-  {
-    id: "ken002",
-    name: "Sukuma Wiki (Sautéed Collard Greens)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/533360/pexels-photo-533360.jpeg",
-    prepTime: "10 min",
-    cookTime: "15 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Large sufuria with lid", "Sharp knife", "Cutting board", "Wooden spoon"],
-    ingredients: ["1 large bunch sukuma wiki", "1 large onion, diced", "2 tomatoes, chopped", "3 tbsp vegetable oil", "2 cloves garlic, minced", "1 tsp salt", "1/2 tsp black pepper"],
-    instructions: [
-      "PREP GREENS: Wash thoroughly (3 rinses). Remove tough stems. Stack leaves, roll tightly, slice into THIN ribbons",
-      "HEAT PAN: Place sufuria over MEDIUM-HIGH heat. Add oil until shimmering",
-      "SWEAT ONIONS: Add onions. Cook 3-4 minutes until TRANSLUCENT",
-      "AROMATICS: Add garlic. Stir 30 SECONDS ONLY. Do not brown",
-      "ADD TOMATOES: Cook 3-4 minutes until soft and juices release",
-      "SEASON: Add salt and pepper",
-      "ADD GREENS GRADUALLY: Add in 3-4 batches, stirring until each batch wilts",
-      "COVER AND STEAM: Cover, reduce heat to MEDIUM-LOW. Cook 5 minutes",
-      "CHECK: Sukuma should be BRIGHT GREEN and tender",
-      "FINAL SEAR: Remove lid, increase heat to HIGH, cook 1-2 minutes to evaporate excess liquid"
-    ],
-    chefTips: ["Sukuma is done when BRIGHT GREEN, not olive brown", "Add pinch of baking soda to preserve color", "Soak in salted water if bitter"],
-    pairingSuggestions: ["Ugali", "Rice", "Chapati", "Roasted chicken"],
-    isFavorite: false,
-    tags: ["vegetable", "healthy", "everyday", "kenyan"]
-  },
-  
-  {
-    id: "ken003",
-    name: "Nyama Choma (Kenyan Roasted Meat)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg",
-    prepTime: "15 min",
-    cookTime: "1 hour",
-    servings: "6 people",
-    difficulty: "Intermediate",
-    equipment: ["Charcoal grill (jiko)", "Grill tongs", "Basting brush", "Sharp knife", "Meat thermometer"],
-    ingredients: ["2 kg goat meat or beef", "3 tbsp vegetable oil", "2 tbsp ginger-garlic paste", "2 tsp salt", "1 tsp black pepper", "2 tsp paprika", "1 lemon, juiced"],
-    instructions: [
-      "MARINATE: Mix all ingredients except meat. Rub into meat. Refrigerate MINIMUM 2 hours, ideally overnight",
-      "PREP GRILL: Light charcoal. Coals ready when covered with WHITE ASH",
-      "ROOM TEMPERATURE: Remove meat 1 hour before grilling. PAT DRY",
-      "OIL GRILL: Grease grates with oiled paper towel",
-      "FIRST SEAR: Place on HOTTEST part. LOUD SIZZLE. DON'T MOVE 3-4 minutes",
-      "FLIP: Meat releases when crust forms. Sear second side 3-4 minutes",
-      "INDIRECT HEAT: Move to cooler side. Cover. Cook to internal temp 60-63°C",
-      "BASTE: Every 10 minutes with marinade mixture",
-      "REST: Remove to board. Tent with foil. Rest MINIMUM 10-15 minutes",
-      "SLICE: Cut AGAINST THE GRAIN into thin slices",
-      "SERVE: Pour accumulated juices over meat"
-    ],
-    chefTips: ["Goat meat is traditional and has better flavor", "SLOW cooking after sear is the secret", "Charred bits are most flavorful"],
-    pairingSuggestions: ["Ugali", "Kachumbari", "Sukuma Wiki", "Cold beer"],
-    isFavorite: false,
-    tags: ["meat", "grill", "celebration", "kenyan"]
-  },
-  
-  {
-    id: "ken004",
-    name: "Githeri (Mixed Beans and Corn Stew)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg",
-    prepTime: "15 min",
-    cookTime: "1.5 hours",
-    servings: "6 people",
-    difficulty: "Easy",
-    equipment: ["Large heavy pot", "Wooden spoon", "Sharp knife"],
-    ingredients: ["2 cups boiled maize", "2 cups boiled beans", "1 onion, chopped", "3 tomatoes, chopped", "2 carrots, diced", "2 potatoes, cubed", "3 tbsp oil", "2 cloves garlic", "1 tsp salt", "1/2 tsp pepper", "1 tsp curry powder", "4 cups water"],
-    instructions: [
-      "SOAK & BOIL: Soak beans and maize overnight. Boil until tender (1 hour). Drain, reserve broth",
-      "SAUTÉ ONIONS: Heat oil. Cook onions 5 minutes until GOLDEN",
-      "ADD GARLIC: Cook 30 seconds until fragrant",
-      "ADD TOMATOES: Cook 4-5 minutes until soft",
-      "SPICES: Add curry, salt, pepper. Cook 1 minute",
-      "ADD VEGETABLES: Add carrots and potatoes. Stir to coat",
-      "ADD BEANS & MAIZE: Stir together",
-      "ADD LIQUID: Pour in water or broth. Bring to boil",
-      "SIMMER: Reduce heat, cover. Cook 25-30 minutes until vegetables tender",
-      "REST: Let sit 5 minutes off heat"
-    ],
-    chefTips: ["Githeri tastes better the next day", "Add pumpkin leaves in last 5 minutes", "Use pressure cooker for faster beans"],
-    pairingSuggestions: ["Rice", "Chapati", "Avocado"],
-    isFavorite: false,
-    tags: ["traditional", "vegetarian", "stew", "kenyan"]
-  },
-  
-  {
-    id: "ken005",
-    name: "Chapati (Kenyan Layered Flatbread)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg",
-    prepTime: "30 min",
-    cookTime: "30 min",
-    servings: "8 chapatis",
-    difficulty: "Intermediate",
-    equipment: ["Large bowl", "Rolling pin", "Tawa or flat pan", "Spatula", "Clean towel"],
-    ingredients: ["3 cups all-purpose flour", "1 tsp salt", "2 tbsp sugar", "3 tbsp oil or ghee", "1 1/4 cups warm water", "Extra oil for frying"],
-    instructions: [
-      "MIX DRY: Combine flour, salt, sugar",
-      "ADD FAT: Rub oil into flour until crumbly",
-      "ADD WATER: Gradually add warm water while kneading",
-      "KNEAD: Knead 8-10 minutes until SMOOTH and ELASTIC",
-      "REST: Cover with damp cloth. Rest MINIMUM 30 minutes",
-      "DIVIDE: Divide into 8 equal balls",
-      "FIRST ROLL: Roll into thin circle (8 inches)",
-      "LAYER: Brush with oil, sprinkle flour, roll into tight rope, coil into spiral",
-      "SECOND ROLL: Flatten spiral, roll again into thin circle",
-      "COOK: On hot pan, cook until bubbles appear. Flip",
-      "OIL: Brush both sides with oil while cooking",
-      "FINISH: Cook until golden brown spots appear",
-      "KEEP WARM: Wrap in clean towel immediately"
-    ],
-    chefTips: ["REST the dough - this is the secret", "Warm water activates gluten faster", "Don't skip the layering step"],
-    pairingSuggestions: ["Beef stew", "Chicken curry", "Bean stew", "Kenyan chai"],
-    isFavorite: false,
-    tags: ["bread", "flatbread", "staple", "kenyan"]
-  },
-  
-  {
-    id: "ken006",
-    name: "Pilau (Spiced Kenyan Rice)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg",
-    prepTime: "15 min",
-    cookTime: "40 min",
-    servings: "6 people",
-    difficulty: "Intermediate",
-    equipment: ["Heavy pot with tight lid", "Fine strainer", "Wooden spoon"],
-    ingredients: ["2 cups basmati rice", "500g beef, cubed", "2 onions, sliced", "4 cloves garlic", "1 tbsp ginger", "3 tomatoes", "4 cups broth", "2 tbsp pilau masala", "Whole spices", "Salt"],
-    instructions: [
-      "WASH RICE: Rinse until water runs CLEAR. Soak 20 minutes. Drain",
-      "FRY ONIONS: Heat oil. Cook onions until DEEP GOLDEN (10-12 minutes)",
-      "RESERVE: Remove half the onions for garnish",
-      "WHOLE SPICES: Add cinnamon, cardamom, cloves, cumin. Fry 1 minute",
-      "AROMATICS: Add ginger and garlic. Cook 30 seconds",
-      "BROWN MEAT: Add meat. Brown on all sides",
-      "SPICES: Add pilau masala and salt. Cook 2 minutes",
-      "TOMATOES: Add tomatoes. Cook until soft and oil separates",
-      "ADD LIQUID: Pour in broth. Simmer until meat tender (20-30 min)",
-      "ADD RICE: Add drained rice. Liquid should be 1 cm above rice",
-      "STEAM: Bring to boil, reduce to LOWEST heat. Cover TIGHTLY. Cook 15-18 min",
-      "REST: Turn off heat. Let rest covered 10 minutes",
-      "FLUFF: Fluff with fork. Top with reserved onions"
-    ],
-    chefTips: ["Wash rice until water is clear to prevent stickiness", "DO NOT open lid while steaming", "Homemade pilau masala is superior"],
-    pairingSuggestions: ["Kachumbari", "Ripe banana", "Maziwa mala"],
-    isFavorite: false,
-    tags: ["rice", "celebration", "party", "swahili", "kenyan"]
-  },
-  
-  {
-    id: "ken007",
-    name: "Mandazi (Kenyan Doughnuts)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg",
-    prepTime: "20 min",
-    cookTime: "20 min",
-    servings: "15 pieces",
-    difficulty: "Easy",
-    equipment: ["Large bowl", "Rolling pin", "Knife", "Deep pot for frying", "Slotted spoon"],
-    ingredients: ["3 cups flour", "1/2 cup sugar", "1 1/2 tsp baking powder", "1/4 tsp salt", "1 tsp cardamom", "1 egg", "3/4 cup coconut milk", "3 tbsp melted butter", "Oil for frying"],
-    instructions: [
-      "MIX DRY: Whisk flour, sugar, baking powder, salt, cardamom",
-      "ADD WET: Make well. Add egg, melted butter, coconut milk",
-      "KNEAD: Knead 5-7 minutes until SMOOTH. Dough should be soft, not sticky",
-      "REST: Cover with damp cloth. Rest 30 minutes",
-      "ROLL: Roll to 1/2 inch thickness",
-      "CUT: Cut into triangles or squares",
-      "HEAT OIL: Heat oil to 170°C (340°F). Test with small dough piece",
-      "FRY: Fry 3-4 at a time. DON'T OVERCROWD",
-      "COOK: 1-2 minutes per side until GOLDEN BROWN",
-      "DRAIN: Remove with slotted spoon. Drain on paper towels",
-      "SERVE: Best served WARM"
-    ],
-    chefTips: ["Coconut milk gives authentic flavor", "Don't roll too thin - mandazi should be fluffy", "Reheat in oven, not microwave"],
-    pairingSuggestions: ["Kenyan chai", "Tea", "Coffee"],
-    isFavorite: false,
-    tags: ["breakfast", "snack", "sweet", "swahili", "kenyan"]
-  },
-  
-  {
-    id: "ken008",
-    name: "Mukimo (Mashed Potatoes with Greens)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg",
-    prepTime: "15 min",
-    cookTime: "30 min",
-    servings: "6 people",
-    difficulty: "Easy",
-    equipment: ["Large pot", "Frying pan", "Potato masher"],
-    ingredients: ["6 large potatoes, peeled", "2 cups pumpkin leaves or spinach", "1 cup fresh maize", "1 onion, chopped", "3 tbsp oil", "Salt"],
-    instructions: [
-      "BOIL POTATOES: Cover with water, add salt. Boil until FORK-TENDER (15-20 min)",
-      "COOK GREENS: Sauté onion in oil. Add maize. Add greens. Cook until wilted",
-      "DRAIN POTATOES: Reserve 1/2 cup water",
-      "MASH: Return potatoes to pot. Add greens mixture. Mash together",
-      "ADJUST: Add reserved water gradually for desired consistency",
-      "SEASON: Add salt to taste",
-      "SERVE: Shape into dome. Serve HOT"
-    ],
-    chefTips: ["Pumpkin leaves (malenge) give authentic flavor", "Add butter for creaminess", "Leftovers make great breakfast patties"],
-    pairingSuggestions: ["Beef stew", "Nyama Choma", "Sukuma Wiki"],
-    isFavorite: false,
-    tags: ["staple", "vegetarian", "kikuyu", "kenyan"]
-  },
-  
-  {
-    id: "ken009",
-    name: "Samosa (Kenyan Style)",
-    category: "🇰🇪 Street Food",
-    image: "https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg",
-    prepTime: "40 min",
-    cookTime: "20 min",
-    servings: "20 samosas",
-    difficulty: "Intermediate",
-    equipment: ["Large bowl", "Frying pan", "Rolling pin", "Deep pot", "Slotted spoon"],
-    ingredients: ["3 cups flour", "1/2 tsp salt", "4 tbsp oil", "3/4 cup warm water", "500g minced beef", "1 onion", "Spices", "Oil for frying"],
-    instructions: [
-      "DOUGH: Mix flour, salt, oil until crumbly. Add water. Knead into FIRM dough. Rest 30 min",
-      "FILLING: Sauté onions until golden. Add meat, brown. Add spices. Cook until DRY. COOL COMPLETELY",
-      "ASSEMBLE: Roll dough thin. Cut semi-circles. Form cones. Fill with COOLED filling. Seal with water",
-      "FRY: Heat oil to 170°C. Fry 3-4 at a time until GOLDEN BROWN and CRISPY",
-      "DRAIN: Drain on paper towels",
-      "SERVE: Serve HOT with chutney or ketchup"
-    ],
-    chefTips: ["Filling MUST be completely cool before filling", "Don't overfill - needs space to seal", "Freeze unfried samosas for later"],
-    pairingSuggestions: ["Ketchup", "Chili sauce", "Tamarind chutney", "Chai"],
-    isFavorite: false,
-    tags: ["street food", "snack", "party", "swahili", "kenyan"]
-  },
-  
-  {
-    id: "ken010",
-    name: "Kachumbari (Tomato-Onion Salad)",
-    category: "🇰🇪 Kenyan Classics",
-    image: "https://images.pexels.com/photos/257816/pexels-photo-257816.jpeg",
-    prepTime: "10 min",
-    cookTime: "0 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Sharp knife", "Cutting board", "Mixing bowl"],
-    ingredients: ["3 large ripe tomatoes", "1 large red onion", "1 bunch fresh coriander", "1-2 green chilies", "Juice of 1 lemon", "1/2 tsp salt", "Pinch black pepper"],
-    instructions: [
-      "PREP TOMATOES: Core and dice into SMALL UNIFORM cubes",
-      "PREP ONION: Peel and finely chop. Soak in cold water 10 min for milder flavor, then drain",
-      "PREP HERBS: Wash and finely chop coriander leaves and tender stems",
-      "PREP CHILI: Remove seeds for less heat. Mince finely. WASH HANDS after",
-      "COMBINE: Mix all ingredients in bowl",
-      "DRESS: Add lemon juice, salt, and pepper",
-      "TOSS: GENTLY toss to combine",
-      "REST: Let sit 5-10 minutes for flavors to meld",
-      "SERVE: Serve IMMEDIATELY - best fresh"
-    ],
-    chefTips: ["Use firm ripe tomatoes that hold shape", "Add mint for extra flavor", "Don't make too far ahead - becomes watery"],
-    pairingSuggestions: ["Nyama Choma", "Pilau", "Fried fish", "Grilled meat"],
-    isFavorite: false,
-    tags: ["salad", "raw", "side dish", "quick", "fresh", "kenyan"]
-  },
+// ==========================================
+// 🇰🇪 MORE KENYAN CLASSICS (8 recipes)
+// ==========================================
 
-  // ==========================================
-  // 🍳 BREAKFAST RECIPES (5 recipes)
-  // ==========================================
-  
-  {
-    id: "brk001",
-    name: "Fluffy American Pancakes",
-    category: "🍳 Breakfast",
-    image: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
-    prepTime: "10 min",
-    cookTime: "15 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Large bowl", "Medium bowl", "Whisk", "Non-stick skillet", "Spatula", "Ladle"],
-    ingredients: ["1 1/2 cups flour", "3 1/2 tsp baking powder", "1 tbsp sugar", "1/4 tsp salt", "1 1/4 cups milk", "1 egg", "3 tbsp melted butter", "1 tsp vanilla"],
-    instructions: [
-      "MIX DRY: Whisk flour, baking powder, sugar, salt in large bowl",
-      "MIX WET: Whisk milk, egg, melted butter, vanilla in medium bowl",
-      "COMBINE: Pour wet into dry. Stir until JUST combined. Batter WILL be lumpy",
-      "REST: Let batter rest 5-10 minutes. DO NOT STIR AGAIN",
-      "HEAT PAN: Medium heat. Test with water drop - should SIZZLE and DANCE",
-      "GREASE: Lightly brush with butter. Wipe off excess",
-      "POUR: Use 1/4 cup measure. Pour from low height",
-      "WATCH: Bubbles will form and POP. Edges look DRY",
-      "FLIP: When bubbles pop, flip once. Cook 1-2 minutes until golden",
-      "KEEP WARM: Stack on plate. Cover with clean towel"
-    ],
-    chefTips: ["FRESH baking powder is essential", "Room temperature ingredients = fluffier pancakes", "First pancake is test pancake"],
-    pairingSuggestions: ["Maple syrup", "Salted butter", "Fresh berries", "Bacon"],
-    isFavorite: false,
-    tags: ["breakfast", "quick", "american", "pancakes"]
-  },
-  
-  {
-    id: "brk002",
-    name: "Kenyan Chai (Spiced Tea)",
-    category: "🍳 Breakfast",
-    image: "https://images.pexels.com/photos/5946991/pexels-photo-5946991.jpeg",
-    prepTime: "2 min",
-    cookTime: "10 min",
-    servings: "4 cups",
-    difficulty: "Easy",
-    equipment: ["Medium pot", "Strainer", "Tea cups"],
-    ingredients: ["4 cups water", "2 cups milk", "4 tsp loose black tea", "4 cardamom pods, crushed", "1 cinnamon stick", "2 slices ginger", "4 tbsp sugar"],
-    instructions: [
-      "BOIL SPICES: Bring water to boil with cardamom, cinnamon, and ginger",
-      "ADD TEA: Add tea leaves. Boil 2 minutes",
-      "ADD MILK: Add milk and sugar. Bring to boil again, WATCHING CAREFULLY",
-      "SIMMER: Reduce heat. Simmer 3-5 minutes until color deepens",
-      "STRAIN: Pour through strainer into cups",
-      "SERVE: Serve PIPING HOT"
-    ],
-    chefTips: ["Use full-fat milk for creamiest chai", "Adjust sugar to taste", "Can add pinch of black pepper for extra warmth"],
-    pairingSuggestions: ["Mandazi", "Chapati", "Bread", "Biscuits"],
-    isFavorite: false,
-    tags: ["drink", "tea", "kenyan", "breakfast", "spiced"]
-  },
-  
-  {
-    id: "brk003",
-    name: "French Toast",
-    category: "🍳 Breakfast",
-    image: "https://images.pexels.com/photos/2113556/pexels-photo-2113556.jpeg",
-    prepTime: "5 min",
-    cookTime: "10 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Shallow dish", "Whisk", "Non-stick pan", "Spatula"],
-    ingredients: ["8 slices bread (thick cut)", "4 eggs", "1/2 cup milk", "1 tsp vanilla", "1 tsp cinnamon", "Butter for frying", "Maple syrup"],
-    instructions: [
-      "CUSTARD: Whisk eggs, milk, vanilla, cinnamon in shallow dish",
-      "SOAK: Dip each bread slice in custard, coating both sides. Let excess drip off",
-      "HEAT PAN: Medium heat. Add butter until melted and foamy",
-      "FRY: Place bread in pan. Cook 2-3 minutes until GOLDEN BROWN",
-      "FLIP: Flip carefully. Cook second side 2-3 minutes",
-      "KEEP WARM: Transfer to warm plate. Cover loosely",
-      "SERVE: Serve hot with maple syrup and fruit"
-    ],
-    chefTips: ["Use day-old bread - fresh bread gets soggy", "Don't oversoak - bread should be coated, not saturated", "Wipe pan between batches"],
-    pairingSuggestions: ["Maple syrup", "Fresh berries", "Powdered sugar", "Bacon"],
-    isFavorite: false,
-    tags: ["breakfast", "quick", "bread", "eggs"]
-  },
-  
-  {
-    id: "brk004",
-    name: "Omelette with Vegetables",
-    category: "🍳 Breakfast",
-    image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
-    prepTime: "5 min",
-    cookTime: "5 min",
-    servings: "1 person",
-    difficulty: "Easy",
-    equipment: ["Small bowl", "Whisk", "Non-stick pan", "Spatula"],
-    ingredients: ["2 eggs", "2 tbsp milk", "1/4 cup chopped vegetables", "Salt", "Pepper", "Butter"],
-    instructions: [
-      "WHISK: Whisk eggs with milk, salt, and pepper until uniform",
-      "HEAT PAN: Medium-low heat. Add butter until melted",
-      "SAUTÉ VEG: Add vegetables. Cook 1 minute until slightly softened",
-      "POUR EGGS: Pour eggs over vegetables. Let set slightly (30 seconds)",
-      "STIR GENTLY: Push cooked edges toward center, tilting pan to let uncooked egg flow",
-      "FOLD: When mostly set but still slightly wet on top, fold in half",
-      "FINISH: Cook 30 seconds more. Slide onto plate"
-    ],
-    chefTips: ["Low heat = creamy omelette. High heat = rubbery", "Don't overbeat eggs - just until combined", "Fillings should be pre-cooked and warm"],
-    pairingSuggestions: ["Toast", "Fresh fruit", "Avocado", "Hot sauce"],
-    isFavorite: false,
-    tags: ["breakfast", "eggs", "quick", "protein"]
-  },
-  
-  {
-    id: "brk005",
-    name: "Uji (Kenyan Fermented Porridge)",
-    category: "🍳 Breakfast",
-    image: "https://images.pexels.com/photos/5419336/pexels-photo-5419336.jpeg",
-    prepTime: "5 min",
-    cookTime: "15 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Medium pot", "Whisk", "Measuring cups", "Bowl"],
-    ingredients: ["1 cup millet flour or uji flour", "4 cups water", "1/2 cup sugar", "Pinch of salt"],
-    instructions: [
-      "MIX PASTE: In bowl, mix flour with 1 cup COLD water until SMOOTH paste forms",
-      "BOIL WATER: Bring remaining 3 cups water to BOIL in pot",
-      "ADD PASTE: Slowly pour flour paste into boiling water, WHISKING CONSTANTLY",
-      "SIMMER: Reduce heat to LOW. Simmer 10-15 minutes, stirring occasionally",
-      "SWEETEN: Add sugar and salt. Stir well",
-      "SERVE: Pour into bowls. Serve HOT"
-    ],
-    chefTips: ["Cold water prevents lumps when making paste", "Stir bottom of pot to prevent scorching", "Can add cardamom or cinnamon for flavor"],
-    pairingSuggestions: ["Mandazi", "Bread", "Banana"],
-    isFavorite: false,
-    tags: ["breakfast", "porridge", "traditional", "kenyan"]
-  },
+{
+  id: "ken011",
+  name: "Matoke (Kenyan Plantain Stew)",
+  category: "🇰🇪 Kenyan Classics",
+  image: "https://images.pexels.com/photos/4110257/pexels-photo-4110257.jpeg",
+  prepTime: "15 min",
+  cookTime: "45 min",
+  servings: "6 people",
+  difficulty: "Easy",
+  equipment: ["Large heavy pot", "Sharp knife", "Wooden spoon"],
+  ingredients: ["8 green plantains, peeled", "500g beef, cubed", "2 onions, chopped", "3 tomatoes, chopped", "4 cloves garlic", "2 tbsp tomato paste", "4 cups beef broth", "Salt", "Pepper", "Fresh coriander"],
+  instructions: [
+    "PREP PLANTAINS: Peel plantains (use oil on hands to prevent sticky residue). Cut into 2-inch chunks",
+    "BROWN MEAT: Heat oil in pot. Brown beef on all sides (5-7 minutes). Remove and set aside",
+    "SAUTÉ ONIONS: Add onions to same pot. Cook until GOLDEN (5 minutes)",
+    "AROMATICS: Add garlic. Cook 30 seconds until fragrant",
+    "ADD TOMATOES: Add tomatoes and tomato paste. Cook until soft (5 minutes)",
+    "RETURN MEAT: Return beef to pot. Add salt and pepper",
+    "ADD LIQUID: Pour in broth. Bring to boil",
+    "SIMMER MEAT: Reduce heat, cover. Simmer 20 minutes",
+    "ADD PLANTAINS: Add plantains. Ensure they're submerged",
+    "COOK: Cover and simmer 20-25 minutes until plantains are FORK-TENDER",
+    "CHECK: Sauce should be thick. If too thin, remove lid and reduce",
+    "GARNISH: Sprinkle with fresh coriander",
+    "SERVE: Serve hot with rice or chapati"
+  ],
+  chefTips: ["Use GREEN plantains - ripe ones become mushy", "Oil hands before peeling to prevent sticky sap", "Don't overcook plantains - they should hold shape"],
+  pairingSuggestions: ["Rice", "Chapati", "Kachumbari"],
+  isFavorite: false,
+  tags: ["stew", "plantain", "traditional", "kenyan"]
+},
 
-  // ==========================================
-  // 🍝 DINNER RECIPES (5 recipes)
-  // ==========================================
-  
-  {
-    id: "din001",
-    name: "Spaghetti Bolognese",
-    category: "🍝 Dinner",
-    image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
-    prepTime: "15 min",
-    cookTime: "45 min",
-    servings: "6 people",
-    difficulty: "Easy",
-    equipment: ["Large pot", "Large pan", "Wooden spoon", "Colander"],
-    ingredients: ["500g spaghetti", "500g ground beef", "1 onion, chopped", "3 cloves garlic", "2 cans crushed tomatoes", "2 tbsp tomato paste", "1 tsp oregano", "Salt", "Pepper", "Parmesan"],
-    instructions: [
-      "COOK PASTA: Boil salted water. Cook spaghetti according to package. Reserve 1/2 cup pasta water",
-      "BROWN MEAT: Heat oil in large pan. Add ground beef. Break up lumps. Cook until BROWNED. Drain excess fat",
-      "SAUTÉ AROMATICS: Add onion and garlic. Cook 3-4 minutes until soft",
-      "ADD TOMATOES: Add tomato paste, crushed tomatoes, oregano. Stir well",
-      "SIMMER: Reduce heat. Simmer 20-30 minutes until thickened. Season with salt and pepper",
-      "COMBINE: Add drained pasta to sauce. Toss to coat. Add pasta water if needed",
-      "SERVE: Plate pasta. Top with Parmesan cheese"
-    ],
-    chefTips: ["Reserve pasta water - starchy water helps sauce cling to pasta", "Simmer sauce longer for deeper flavor", "Use combination of beef and pork for richness"],
-    pairingSuggestions: ["Garlic bread", "Green salad", "Red wine"],
-    isFavorite: false,
-    tags: ["pasta", "italian", "dinner", "family", "beef"]
-  },
-  
-  {
-    id: "din002",
-    name: "Beef Stew",
-    category: "🍝 Dinner",
-    image: "https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg",
-    prepTime: "20 min",
-    cookTime: "2 hours",
-    servings: "6 people",
-    difficulty: "Easy",
-    equipment: ["Large heavy pot", "Wooden spoon", "Sharp knife"],
-    ingredients: ["1 kg beef chuck, cubed", "3 tbsp flour", "2 onions, chopped", "4 carrots, chunked", "4 potatoes, cubed", "4 cups beef broth", "2 tbsp tomato paste", "2 bay leaves", "Salt", "Pepper"],
-    instructions: [
-      "COAT BEEF: Toss beef in seasoned flour",
-      "BROWN MEAT: Heat oil in pot. Brown beef in BATCHES. Don't overcrowd. Remove and set aside",
-      "SAUTÉ ONIONS: Add onions to pot. Cook until soft (5 minutes)",
-      "DEGLAZE: Add tomato paste. Stir 1 minute. Add broth, scraping bottom of pot",
-      "RETURN BEEF: Return beef to pot. Add bay leaves. Bring to boil",
-      "SIMMER: Reduce heat to LOW. Cover. Simmer 1 hour",
-      "ADD VEGETABLES: Add carrots and potatoes. Simmer 30-45 minutes until tender",
-      "THICKEN: Remove lid if too thin. Simmer to reduce",
-      "SEASON: Taste and adjust seasoning. Remove bay leaves",
-      "SERVE: Ladle into bowls"
-    ],
-    chefTips: ["Brown meat in batches for proper searing", "Chuck roast is best for stew - becomes tender with slow cooking", "Make day ahead - flavors improve"],
-    pairingSuggestions: ["Crusty bread", "Mashed potatoes", "Rice"],
-    isFavorite: false,
-    tags: ["stew", "comfort food", "dinner", "beef", "slow-cooked"]
-  },
-  
-  {
-    id: "din003",
-    name: "Roast Chicken",
-    category: "🍝 Dinner",
-    image: "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg",
-    prepTime: "15 min",
-    cookTime: "1.5 hours",
-    servings: "6 people",
-    difficulty: "Intermediate",
-    equipment: ["Roasting pan", "Meat thermometer", "Kitchen twine", "Basting brush"],
-    ingredients: ["1 whole chicken (1.5-2 kg)", "4 tbsp butter, softened", "4 cloves garlic, minced", "1 lemon, halved", "Salt", "Pepper", "Fresh herbs (rosemary, thyme)"],
-    instructions: [
-      "PREP CHICKEN: Remove from fridge 1 hour before. PAT COMPLETELY DRY with paper towels",
-      "PREHEAT: Oven to 200°C (400°F)",
-      "SEASON BUTTER: Mix softened butter with garlic, salt, pepper, chopped herbs",
-      "SEASON CHICKEN: Gently loosen skin over breast. Rub butter UNDER skin and all over outside",
-      "STUFF CAVITY: Place lemon halves and herb sprigs inside cavity",
-      "TRUSS: Tie legs together with twine. Tuck wing tips under",
-      "ROAST: Place in pan. Roast 1 hour 15 min to 1 hour 30 min",
-      "BASTE: Baste with pan juices every 20 minutes",
-      "CHECK DONENESS: Thickest part of thigh should read 74°C (165°F). Juices run CLEAR",
-      "REST: Remove from oven. Tent with foil. Rest MINIMUM 15 minutes",
-      "CARVE: Remove twine. Carve and serve"
-    ],
-    chefTips: ["DRY skin = CRISPY skin. Pat thoroughly dry", "Room temperature chicken cooks evenly", "Save carcass for stock"],
-    pairingSuggestions: ["Roasted vegetables", "Mashed potatoes", "Gravy"],
-    isFavorite: false,
-    tags: ["dinner", "chicken", "roast", "family", "holiday"]
-  },
-  
-  {
-    id: "din004",
-    name: "Beef Stir Fry",
-    category: "🍝 Dinner",
-    image: "https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg",
-    prepTime: "15 min",
-    cookTime: "10 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Wok or large pan", "Sharp knife", "Small bowl", "Spatula"],
-    ingredients: ["500g beef strips", "1 onion, sliced", "1 bell pepper, sliced", "2 carrots, julienned", "3 tbsp soy sauce", "2 tbsp oyster sauce", "2 cloves garlic", "1 tbsp ginger", "Oil"],
-    instructions: [
-      "PREP: Slice beef THINLY against grain. Have all vegetables prepped before starting",
-      "HEAT WOK: Heat until SMOKING. Add oil. Swirl to coat",
-      "COOK BEEF: Add beef in single layer. DON'T MOVE for 1 minute. Stir-fry 2-3 minutes until browned. Remove",
-      "COOK VEGETABLES: Add more oil. Add garlic and ginger. Stir 30 seconds. Add harder vegetables first (carrots), then softer",
-      "COMBINE: Return beef to wok. Add soy sauce and oyster sauce",
-      "FINISH: Toss everything 1-2 minutes until hot and coated",
-      "SERVE: Immediately with rice"
-    ],
-    chefTips: ["Slice beef when partially frozen for thin, even slices", "Everything must be prepped before starting - stir fry moves FAST", "Don't overcrowd wok - cook in batches if needed"],
-    pairingSuggestions: ["Steamed rice", "Noodles", "Chili oil"],
-    isFavorite: false,
-    tags: ["dinner", "stir fry", "asian", "quick", "beef"]
-  },
-  
-  {
-    id: "din005",
-    name: "Creamy Chicken Curry",
-    category: "🍝 Dinner",
-    image: "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg",
-    prepTime: "15 min",
-    cookTime: "30 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Large pan", "Wooden spoon", "Sharp knife"],
-    ingredients: ["500g chicken thighs, cubed", "1 onion, chopped", "3 cloves garlic", "1 tbsp ginger", "2 tbsp curry powder", "1 can coconut milk", "1 cup tomato puree", "Salt", "Oil", "Coriander"],
-    instructions: [
-      "SEASON CHICKEN: Season with salt",
-      "BROWN CHICKEN: Heat oil. Brown chicken in batches. Remove",
-      "SAUTÉ ONIONS: Add onion to pan. Cook until soft (5 minutes)",
-      "AROMATICS: Add garlic and ginger. Cook 30 seconds",
-      "SPICES: Add curry powder. Cook 1 minute until fragrant",
-      "ADD LIQUIDS: Add tomato puree and coconut milk. Stir well",
-      "SIMMER: Return chicken to pan. Simmer 15-20 minutes until chicken cooked and sauce thickened",
-      "SEASON: Taste and adjust salt",
-      "GARNISH: Sprinkle with fresh coriander",
-      "SERVE: With rice or naan"
-    ],
-    chefTips: ["Use chicken thighs - stay juicier than breast", "Bloom spices in oil for deeper flavor", "Coconut milk should be full-fat for creaminess"],
-    pairingSuggestions: ["Basmati rice", "Naan bread", "Mango chutney"],
-    isFavorite: false,
-    tags: ["dinner", "curry", "chicken", "creamy"]
-  },
+{
+  id: "ken012",
+  name: "Wali wa Nazi (Coconut Rice)",
+  category: "🇰🇪 Kenyan Classics",
+  image: "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg",
+  prepTime: "5 min",
+  cookTime: "25 min",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Medium pot with tight lid", "Fine strainer", "Fork"],
+  ingredients: ["2 cups basmati rice", "1 can (400ml) coconut milk", "1 1/2 cups water", "1 tsp salt", "1 tbsp sugar (optional)"],
+  instructions: [
+    "WASH RICE: Rinse rice until water runs CLEAR. Soak 15 minutes. Drain WELL",
+    "COMBINE LIQUIDS: In pot, combine coconut milk, water, salt, and sugar",
+    "HEAT: Bring to GENTLE boil over medium heat, stirring to dissolve salt",
+    "ADD RICE: Add drained rice. Stir ONCE gently",
+    "SIMMER: Reduce heat to LOWEST setting. Cover with TIGHT lid",
+    "STEAM: Cook 15-18 minutes. DO NOT OPEN LID",
+    "REST: Turn off heat. Let rest covered 10 minutes",
+    "FLUFF: Remove lid. Fluff gently with fork",
+    "SERVE: Serve hot as side dish"
+  ],
+  chefTips: ["Full-fat coconut milk gives best flavor", "Don't stir after adding rice - makes it sticky", "Can add a pandan leaf for aroma"],
+  pairingSuggestions: ["Curry", "Stew", "Grilled fish", "Beans"],
+  isFavorite: false,
+  tags: ["rice", "coconut", "swahili", "side dish", "kenyan"]
+},
 
-  // ==========================================
-  // 🍰 DESSERTS (3 recipes)
-  // ==========================================
-  
-  {
-    id: "des001",
-    name: "Chocolate Cake",
-    category: "🍰 Desserts",
-    image: "https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg",
-    prepTime: "15 min",
-    cookTime: "35 min",
-    servings: "8 people",
-    difficulty: "Easy",
-    equipment: ["Two 9-inch cake pans", "Large bowl", "Electric mixer", "Wire rack"],
-    ingredients: ["1 3/4 cups flour", "3/4 cup cocoa powder", "2 cups sugar", "1 1/2 tsp baking powder", "1 1/2 tsp baking soda", "1 tsp salt", "2 eggs", "1 cup milk", "1/2 cup oil", "2 tsp vanilla", "1 cup hot coffee"],
-    instructions: [
-      "PREHEAT: Oven to 180°C (350°F). Grease and flour pans",
-      "MIX DRY: Whisk all dry ingredients in large bowl",
-      "ADD WET: Add eggs, milk, oil, vanilla. Beat 2 minutes on medium",
-      "ADD COFFEE: Stir in hot coffee. Batter will be THIN",
-      "BAKE: Pour into pans. Bake 30-35 minutes until toothpick comes out clean",
-      "COOL: Cool in pans 10 minutes. Remove to wire rack. Cool COMPLETELY before frosting"
-    ],
-    chefTips: ["Hot coffee enhances chocolate flavor (cake won't taste like coffee)", "Room temperature ingredients mix better", "Don't overbake - cake continues cooking from residual heat"],
-    pairingSuggestions: ["Chocolate frosting", "Vanilla ice cream", "Fresh berries"],
-    isFavorite: false,
-    tags: ["dessert", "cake", "chocolate", "baking"]
-  },
-  
-  {
-    id: "des002",
-    name: "Banana Bread",
-    category: "🍰 Desserts",
-    image: "https://images.pexels.com/photos/1277202/pexels-photo-1277202.jpeg",
-    prepTime: "15 min",
-    cookTime: "1 hour",
-    servings: "8 people",
-    difficulty: "Easy",
-    equipment: ["Loaf pan", "Large bowl", "Fork", "Spatula"],
-    ingredients: ["3 ripe bananas, mashed", "1/2 cup melted butter", "1 cup sugar", "1 egg", "1 tsp vanilla", "1 tsp baking soda", "1 1/2 cups flour", "Pinch salt"],
-    instructions: [
-      "PREHEAT: Oven to 175°C (350°F). Grease loaf pan",
-      "MASH BANANAS: Mash bananas well with fork",
-      "MIX WET: Add melted butter, sugar, egg, vanilla to bananas. Mix well",
-      "ADD DRY: Sprinkle baking soda and salt. Mix. Add flour. Mix until JUST combined",
-      "BAKE: Pour into pan. Bake 50-60 minutes until toothpick comes out clean",
-      "COOL: Cool in pan 10 minutes. Remove and cool completely"
-    ],
-    chefTips: ["Use OVERRIPE bananas (black spots on peel) for best flavor", "Don't overmix - tough bread", "Can add 1/2 cup chocolate chips or walnuts"],
-    pairingSuggestions: ["Butter", "Coffee", "Tea"],
-    isFavorite: false,
-    tags: ["dessert", "baking", "banana", "bread"]
-  },
-  
-  {
-    id: "des003",
-    name: "Rice Pudding",
-    category: "🍰 Desserts",
-    image: "https://images.pexels.com/photos/2303258/pexels-photo-2303258.jpeg",
-    prepTime: "5 min",
-    cookTime: "30 min",
-    servings: "4 people",
-    difficulty: "Easy",
-    equipment: ["Medium pot", "Wooden spoon", "Measuring cups"],
-    ingredients: ["1 cup short-grain rice", "4 cups milk", "1/2 cup sugar", "1 tsp vanilla", "Pinch salt", "Cinnamon for garnish"],
-    instructions: [
-      "COMBINE: In pot, combine rice, milk, sugar, salt",
-      "HEAT: Bring to GENTLE simmer over medium heat, stirring often",
-      "SIMMER: Reduce heat to LOW. Cook 25-30 minutes, stirring frequently, until rice is tender and mixture is CREAMY",
-      "ADD VANILLA: Remove from heat. Stir in vanilla",
-      "COOL: Pudding will thicken as it cools. Serve warm or chilled",
-      "GARNISH: Sprinkle with cinnamon before serving"
-    ],
-    chefTips: ["Short-grain rice gives creamiest texture (arborio or pudding rice)", "Stir frequently to prevent sticking", "Add raisins or cardamom for variation"],
-    pairingSuggestions: ["Cinnamon", "Fresh fruit", "Jam"],
-    isFavorite: false,
-    tags: ["dessert", "pudding", "rice", "comfort food"]
-  },
+{
+  id: "ken013",
+  name: "Mahamri (Swahili Coconut Doughnuts)",
+  category: "🇰🇪 Kenyan Classics",
+  image: "https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg",
+  prepTime: "20 min",
+  cookTime: "15 min",
+  servings: "12 pieces",
+  difficulty: "Intermediate",
+  equipment: ["Large bowl", "Rolling pin", "Knife", "Deep pot", "Slotted spoon"],
+  ingredients: ["3 cups flour", "1/2 cup sugar", "1 tsp yeast", "1 cup coconut milk, warm", "1 tsp cardamom", "1/4 tsp salt", "Oil for frying"],
+  instructions: [
+    "ACTIVATE YEAST: Mix warm coconut milk with 1 tsp sugar and yeast. Let sit 5-10 minutes until FOAMY",
+    "MIX DRY: In bowl, combine flour, remaining sugar, cardamom, salt",
+    "COMBINE: Add yeast mixture to dry ingredients. Mix to form dough",
+    "KNEAD: Knead 8-10 minutes until SMOOTH and ELASTIC",
+    "FIRST RISE: Cover with damp cloth. Let rise in warm place 1 hour or until DOUBLED",
+    "PUNCH DOWN: Punch dough to release air",
+    "ROLL: Roll to 1/2 inch thickness",
+    "CUT: Cut into squares or triangles",
+    "SECOND RISE: Cover cut pieces. Let rest 15 minutes",
+    "HEAT OIL: Heat oil to 170°C (340°F)",
+    "FRY: Fry 3-4 at a time until GOLDEN BROWN on both sides",
+    "DRAIN: Drain on paper towels",
+    "SERVE: Best served warm with chai"
+  ],
+  chefTips: ["Warm coconut milk activates yeast better", "Don't skip second rise - makes mahamri fluffy", "Cardamom is essential for authentic flavor"],
+  pairingSuggestions: ["Kenyan chai", "Coffee", "Mango juice"],
+  isFavorite: false,
+  tags: ["swahili", "breakfast", "snack", "coconut", "kenyan"]
+},
 
-  // ==========================================
-  // NOTE: This is a condensed version with 18 fully detailed recipes
-  // The app structure supports all 57 recipes
-  // Each recipe includes: equipment, detailed instructions, chef tips, and pairings
-  // ==========================================
-];
+{
+  id: "ken014",
+  name: "Mbaazi za Nazi (Pigeon Peas in Coconut)",
+  category: "🇰🇪 Kenyan Classics",
+  image: "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg",
+  prepTime: "10 min",
+  cookTime: "45 min",
+  servings: "6 people",
+  difficulty: "Easy",
+  equipment: ["Large pot", "Wooden spoon", "Sharp knife"],
+  ingredients: ["2 cups dried pigeon peas", "1 can coconut milk", "1 onion, chopped", "2 tomatoes, chopped", "3 cloves garlic", "1 tsp turmeric", "Salt to taste", "2 cups water"],
+  instructions: [
+    "SOAK PEAS: Soak pigeon peas overnight. Drain and rinse",
+    "BOIL PEAS: Boil in water until tender (about 30 minutes). Drain",
+    "SAUTÉ ONIONS: Heat oil in pot. Cook onions until soft (5 minutes)",
+    "AROMATICS: Add garlic. Cook 30 seconds",
+    "ADD TOMATOES: Add tomatoes. Cook until soft (5 minutes)",
+    "SPICES: Add turmeric and salt. Stir 1 minute",
+    "COMBINE: Add boiled peas and coconut milk",
+    "SIMMER: Simmer 10-15 minutes until thick and creamy",
+    "TASTE: Adjust seasoning",
+    "SERVE: Serve hot with chapati or rice"
+  ],
+  chefTips: ["Don't add salt while boiling peas - makes them tough", "Can use canned pigeon peas for speed (drain and rinse)", "Add chili for heat"],
+  pairingSuggestions: ["Chapati", "Rice", "Coconut rice"],
+  isFavorite: false,
+  tags: ["swahili", "coconut", "vegetarian", "stew", "kenyan"]
+},
+
+// ==========================================
+// 🇰🇪 KENYAN STREET FOOD (4 recipes)
+// ==========================================
+
+{
+  id: "stf001",
+  name: "Bhajia (Potato Fritters)",
+  category: "🇰🇪 Street Food",
+  image: "https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg",
+  prepTime: "15 min",
+  cookTime: "15 min",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Sharp knife", "Mixing bowl", "Deep pot", "Slotted spoon"],
+  ingredients: ["4 large potatoes", "1 cup gram flour (besan)", "1/2 cup water", "1 tsp chili powder", "1/2 tsp turmeric", "1 tsp salt", "Oil for frying"],
+  instructions: [
+    "SLICE POTATOES: Slice potatoes THINLY (1/4 inch / 0.5 cm). Use mandoline if available",
+    "MAKE BATTER: Mix gram flour, spices, and salt. Add water gradually to make THICK batter (coats back of spoon)",
+    "HEAT OIL: Heat oil to 170°C (340°F)",
+    "COAT: Dip each potato slice in batter, coating WELL",
+    "FRY: Carefully slide into hot oil. Fry 2-3 minutes per side until GOLDEN and CRISPY",
+    "DRAIN: Remove with slotted spoon. Drain on paper towels",
+    "SERVE: Serve HOT with chutney or ketchup"
+  ],
+  chefTips: ["Batter should be thick enough to coat potato without dripping off", "Don't overcrowd - drops oil temperature", "Serve immediately - loses crispness"],
+  pairingSuggestions: ["Tamarind chutney", "Chili sauce", "Ketchup", "Chai"],
+  isFavorite: false,
+  tags: ["street food", "snack", "potato", "fried", "kenyan"]
+},
+
+{
+  id: "stf002",
+  name: "Viazi Karai (Spiced Potato Fritters)",
+  category: "🇰🇪 Street Food",
+  image: "https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg",
+  prepTime: "15 min",
+  cookTime: "15 min",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Pot for boiling", "Mixing bowl", "Deep pot for frying", "Slotted spoon"],
+  ingredients: ["6 potatoes, boiled", "1 cup gram flour", "1/2 cup water", "1 tsp chili", "1/2 tsp turmeric", "1 tsp salt", "Oil for frying"],
+  instructions: [
+    "BOIL POTATOES: Boil until JUST tender (don't overcook). Cool completely",
+    "SLICE: Slice into rounds",
+    "MAKE BATTER: Mix gram flour, spices, salt, and water into THICK batter",
+    "HEAT OIL: Heat oil to 170°C (340°F)",
+    "COAT: Dip each slice in batter",
+    "FRY: Fry until GOLDEN BROWN and CRISPY (2-3 minutes per side)",
+    "DRAIN: Drain on paper towels",
+    "SERVE: Serve HOT"
+  ],
+  chefTips: ["Potatoes must be completely cool before frying", "Batter should be thick like pancake batter", "Double fry for extra crispness"],
+  pairingSuggestions: ["Tamarind sauce", "Chili sauce", "Lemon wedges"],
+  isFavorite: false,
+  tags: ["street food", "snack", "potato", "swahili", "kenyan"]
+},
+
+{
+  id: "stf003",
+  name: "Mshikaki (Grilled Meat Skewers)",
+  category: "🇰🇪 Street Food",
+  image: "https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg",
+  prepTime: "20 min",
+  cookTime: "15 min",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Skewers (soaked if wooden)", "Grill or grill pan", "Mixing bowl", "Tongs"],
+  ingredients: ["500g beef or goat, cubed", "2 tbsp yogurt", "1 tbsp ginger-garlic paste", "1 tsp cumin", "1 tsp paprika", "1/2 tsp chili", "Salt", "Lemon juice"],
+  instructions: [
+    "MARINATE: Mix yogurt, ginger-garlic, spices, salt, lemon juice. Add meat. Mix well",
+    "REST: Marinate MINIMUM 2 hours, ideally overnight",
+    "THREAD: Thread meat onto skewers, leaving small gap between pieces",
+    "PREHEAT GRILL: Medium-high heat",
+    "GRILL: Cook 3-4 minutes per side until CHARRED and cooked through",
+    "REST: Let rest 5 minutes",
+    "SERVE: Serve hot with Kachumbari"
+  ],
+  chefTips: ["Don't overcrowd skewers - meat needs space to cook evenly", "Soak wooden skewers 30 minutes to prevent burning", "Baste with marinade while grilling"],
+  pairingSuggestions: ["Kachumbari", "Ugali", "Chili sauce", "Cold beer"],
+  isFavorite: false,
+  tags: ["street food", "meat", "grill", "skewers", "kenyan"]
+},
+
+// ==========================================
+// 🇰🇪 KENYAN STEWS (4 recipes)
+// ==========================================
+
+{
+  id: "stew001",
+  name: "Beef Wet Fry (Nyama Choma ya Mchuzi)",
+  category: "🇰🇪 Kenyan Stews",
+  image: "https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg",
+  prepTime: "15 min",
+  cookTime: "1 hour",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Large pot", "Sharp knife", "Wooden spoon"],
+  ingredients: ["500g beef, cubed", "2 onions, chopped", "3 tomatoes, chopped", "4 cloves garlic", "1 tbsp ginger", "2 tsp curry powder", "1 tsp paprika", "Salt", "Oil", "Water"],
+  instructions: [
+    "BOIL BEEF: Place beef in pot. Cover with water. Boil until TENDER (40-50 minutes). Drain, RESERVE broth",
+    "FRY BEEF: Heat oil in pan. Add boiled beef. Fry until BROWNED on all sides (5-7 minutes)",
+    "SAUTÉ ONIONS: Push beef to sides. Add onions to center. Cook until soft",
+    "AROMATICS: Add garlic and ginger. Cook 30 seconds",
+    "ADD TOMATOES: Add tomatoes. Cook until soft and mushy",
+    "SPICES: Add curry powder, paprika, salt. Stir well",
+    "ADD BROTH: Add 1/2 cup reserved broth. Simmer 5-10 minutes until sauce thickens",
+    "SERVE: Serve hot with ugali or rice"
+  ],
+  chefTips: ["Boiling beef first ensures tenderness", "Reserve broth - adds flavor to sauce", "Fry beef until well browned for best flavor"],
+  pairingSuggestions: ["Ugali", "Rice", "Chapati", "Sukuma Wiki"],
+  isFavorite: false,
+  tags: ["beef", "stew", "kenyan", "dinner"]
+},
+
+{
+  id: "stew002",
+  name: "Chicken Curry (Kuku wa Mchuzi)",
+  category: "🇰🇪 Kenyan Stews",
+  image: "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg",
+  prepTime: "15 min",
+  cookTime: "45 min",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Large pan", "Sharp knife", "Wooden spoon"],
+  ingredients: ["1 whole chicken, cut up", "2 onions, chopped", "3 tomatoes, chopped", "4 cloves garlic", "1 tbsp ginger", "2 tbsp curry powder", "1 tsp turmeric", "1 cup coconut milk", "Salt", "Oil"],
+  instructions: [
+    "SEASON CHICKEN: Season chicken pieces with salt",
+    "BROWN CHICKEN: Heat oil. Brown chicken on all sides. Remove",
+    "SAUTÉ ONIONS: Add onions to same pan. Cook until GOLDEN (7-8 minutes)",
+    "AROMATICS: Add garlic and ginger. Cook 30 seconds",
+    "SPICES: Add curry powder and turmeric. Cook 1 minute until FRAGRANT",
+    "ADD TOMATOES: Add tomatoes. Cook until soft and oil separates (5 minutes)",
+    "RETURN CHICKEN: Return chicken to pan. Stir to coat",
+    "ADD COCONUT MILK: Pour in coconut milk. Bring to simmer",
+    "COOK: Cover and simmer 25-30 minutes until chicken is COOKED and sauce is THICK",
+    "SEASON: Taste and adjust salt",
+    "SERVE: Garnish with coriander. Serve hot"
+  ],
+  chefTips: ["Browning chicken adds depth of flavor", "Bloom spices in oil for maximum flavor", "Use chicken thighs for juicier result"],
+  pairingSuggestions: ["Rice", "Chapati", "Ugali", "Coconut rice"],
+  isFavorite: false,
+  tags: ["chicken", "curry", "stew", "kenyan", "dinner"]
+},
+
+{
+  id: "stew003",
+  name: "Bean Stew (Maharagwe ya Nazi)",
+  category: "🇰🇪 Kenyan Stews",
+  image: "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg",
+  prepTime: "10 min",
+  cookTime: "1 hour",
+  servings: "6 people",
+  difficulty: "Easy",
+  equipment: ["Large pot", "Wooden spoon", "Sharp knife"],
+  ingredients: ["3 cups dried beans (kidney or pinto)", "1 onion, chopped", "3 tomatoes, chopped", "3 cloves garlic", "1 can coconut milk", "1 tsp curry powder", "Salt", "Water"],
+  instructions: [
+    "SOAK BEANS: Soak beans overnight. Drain and rinse",
+    "BOIL BEANS: Cover with fresh water. Boil until TENDER (45-60 minutes). Drain, RESERVE 1 cup broth",
+    "SAUTÉ ONIONS: Heat oil. Cook onions until soft (5 minutes)",
+    "AROMATICS: Add garlic. Cook 30 seconds",
+    "ADD TOMATOES: Add tomatoes. Cook until soft (5 minutes)",
+    "SPICES: Add curry powder and salt. Stir 1 minute",
+    "COMBINE: Add boiled beans, coconut milk, and reserved broth",
+    "SIMMER: Simmer 15-20 minutes until THICK and CREAMY",
+    "MASH: Mash some beans against pot side to thicken",
+    "SERVE: Serve hot"
+  ],
+  chefTips: ["Don't salt beans while boiling - they become tough", "Reserve bean broth - it's liquid gold", "Mashing beans naturally thickens stew"],
+  pairingSuggestions: ["Rice", "Chapati", "Bread", "Plantains"],
+  isFavorite: false,
+  tags: ["beans", "stew", "vegetarian", "coconut", "kenyan"]
+},
+
+// ==========================================
+// 🍳 BREAKFAST (2 recipes)
+// ==========================================
+
+{
+  id: "brk006",
+  name: "Crepes (Thin French Pancakes)",
+  category: "🍳 Breakfast",
+  image: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+  prepTime: "10 min",
+  cookTime: "15 min",
+  servings: "4 people",
+  difficulty: "Intermediate",
+  equipment: ["Mixing bowl", "Whisk", "Non-stick pan (8-10 inch)", "Ladle", "Spatula"],
+  ingredients: ["1 cup flour", "2 eggs", "1 1/4 cups milk", "2 tbsp melted butter", "Pinch salt", "Butter for pan"],
+  instructions: [
+    "MAKE BATTER: Whisk flour and salt. Add eggs, whisk. Gradually add milk, whisking until SMOOTH",
+    "ADD BUTTER: Whisk in melted butter",
+    "REST: Let batter rest MINIMUM 30 minutes (or overnight)",
+    "HEAT PAN: Medium heat. Lightly butter pan",
+    "POUR: Lift pan off heat. Pour 1/4 cup batter. SWIRL to coat bottom thinly",
+    "COOK: Return to heat. Cook 1-2 minutes until edges BROWN and surface looks DRY",
+    "FLIP: Loosen edges with spatula. Flip with fingers or spatula",
+    "FINISH: Cook second side 30 seconds",
+    "STACK: Stack on plate. Cover to keep warm",
+    "FILL: Fill with sweet or savory fillings"
+  ],
+  chefTips: ["Resting batter = tender crepes", "First crepe is usually test crepe - adjust heat after", "Swirl quickly for thin, even crepe"],
+  pairingSuggestions: ["Nutella and banana", "Ham and cheese", "Lemon and sugar", "Fresh berries and cream"],
+  isFavorite: false,
+  tags: ["breakfast", "french", "crepes", "pancakes", "versatile"]
+},
+
+{
+  id: "brk007",
+  name: "Shakshuka (Eggs in Tomato Sauce)",
+  category: "🍳 Breakfast",
+  image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
+  prepTime: "10 min",
+  cookTime: "20 min",
+  servings: "4 people",
+  difficulty: "Easy",
+  equipment: ["Large skillet with lid", "Sharp knife", "Wooden spoon"],
+  ingredients: ["6 eggs", "1 onion, chopped", "1 bell pepper, chopped", "3 cloves garlic", "1 can crushed tomatoes", "1 tsp cumin", "1 tsp paprika", "1/2 tsp chili", "Salt", "Pepper", "Fresh parsley", "Oil"],
+  instructions: [
+    "SAUTÉ VEGETABLES: Heat oil. Cook onion and bell pepper until soft (5-7 minutes)",
+    "AROMATICS: Add garlic, cumin, paprika, chili. Cook 1 minute until FRAGRANT",
+    "ADD TOMATOES: Add crushed tomatoes. Season with salt and pepper",
+    "SIMMER: Simmer 10 minutes until sauce THICKENS slightly",
+    "MAKE WELLS: Using spoon, make 6 wells in sauce",
+    "ADD EGGS: Crack an egg into each well",
+    "COVER: Cover with lid. Cook 5-8 minutes until egg whites are SET but yolks are RUNNY",
+    "GARNISH: Sprinkle with fresh parsley and black pepper",
+    "SERVE: Serve immediately with bread for dipping"
+  ],
+  chefTips: ["Cook eggs until whites are JUST set - carryover cooking continues", "For firmer yolks, cook 2-3 minutes longer", "Add feta cheese crumbles before eggs for extra flavor"],
+  pairingSuggestions: ["Crusty bread", "Pita bread", "Fresh salad", "Hot sauce"],
+  isFavorite: false,
+  tags: ["breakfast", "eggs", "middle eastern", "vegetarian", "brunch"]
+},
+
+// ==========================================
+// 🍝 DINNER (1 recipe)
+// ==========================================
+
+{
+  id: "din006",
+  name: "Lasagna",
+  category: "🍝 Dinner",
+  image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
+  prepTime: "30 min",
+  cookTime: "45 min",
+  servings: "8 people",
+  difficulty: "Intermediate",
+  equipment: ["9x13 baking dish", "Large pot", "Large pan", "Mixing bowls"],
+  ingredients: ["500g lasagna sheets", "500g ground beef", "1 onion, chopped", "4 cloves garlic", "2 cans crushed tomatoes", "500g ricotta cheese", "1 egg", "500g mozzarella, shredded", "1 cup Parmesan", "Fresh basil", "Salt", "Pepper"],
+  instructions: [
+    "MAKE MEAT SAUCE: Brown beef. Add onion and garlic. Cook until soft. Add tomatoes. Simmer 20 minutes. Season",
+    "MAKE RICOTTA MIXTURE: Mix ricotta, egg, 1/2 cup Parmesan, salt, pepper, chopped basil",
+    "COOK PASTA: Cook lasagna sheets according to package. Drain. Lay flat on oiled surface",
+    "PREHEAT: Oven to 180°C (375°F)",
+    "ASSEMBLE LAYER 1: Spread 1 cup meat sauce in bottom of dish",
+    "LAYER 2: Add layer of pasta sheets",
+    "LAYER 3: Spread 1/3 ricotta mixture",
+    "LAYER 4: Sprinkle 1/3 mozzarella",
+    "REPEAT: Repeat layers 2 more times (pasta, ricotta, mozzarella, meat sauce)",
+    "TOP LAYER: Final layer of pasta, remaining meat sauce, remaining mozzarella, and Parmesan",
+    "BAKE: Cover with foil. Bake 25 minutes. Remove foil. Bake 20 minutes until BUBBLY and GOLDEN",
+    "REST: Let rest MINIMUM 15 minutes before cutting",
+    "SERVE: Garnish with fresh basil"
+  ],
+  chefTips: ["Resting is CRUCIAL - lasagna holds shape when cut", "Make day ahead - flavors improve", "No-boil noodles work well and save time"],
+  pairingSuggestions: ["Garlic bread", "Green salad", "Red wine"],
+  isFavorite: false,
+  tags: ["italian", "pasta", "dinner", "family", "baked", "cheese"]
+},
+
+// ==========================================
+// 🍰 DESSERTS (1 recipe)
+// ==========================================
+
+{
+  id: "des004",
+  name: "Tiramisu (Italian Coffee Dessert)",
+  category: "🍰 Desserts",
+  image: "https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg",
+  prepTime: "30 min",
+  cookTime: "0 min",
+  servings: "8 people",
+  difficulty: "Intermediate",
+  equipment: ["8x8 dish", "Mixing bowls", "Electric mixer", "Espresso maker or strong coffee"],
+  ingredients: ["500g mascarpone cheese", "4 eggs, separated", "1/2 cup sugar", "300g ladyfinger cookies", "2 cups strong coffee, cooled", "Cocoa powder for dusting"],
+  instructions: [
+    "MAKE COFFEE: Brew strong coffee. Cool completely",
+    "BEAT YOLKS: Beat egg yolks with sugar until PALE and THICK (3-4 minutes)",
+    "ADD MASCARPONE: Add mascarpone. Beat until SMOOTH",
+    "BEAT WHITES: In separate clean bowl, beat egg whites until STIFF PEAKS form",
+    "FOLD: Gently fold egg whites into mascarpone mixture",
+    "ASSEMBLE: Quickly dip each ladyfinger in coffee (1 SECOND per side - don't soak!)",
+    "LAYER 1: Arrange dipped ladyfingers in single layer in dish",
+    "LAYER 2: Spread half the mascarpone mixture",
+    "REPEAT: Another layer of dipped ladyfingers, then remaining mascarpone",
+    "CHILL: Cover and refrigerate MINIMUM 4 hours, ideally overnight",
+    "DUST: Before serving, dust generously with cocoa powder",
+    "SERVE: Serve COLD"
+  ],
+  chefTips: ["Dip ladyfingers QUICKLY - they absorb coffee fast and become mushy", "Use room temperature mascarpone for smooth mixture", "Raw eggs - use pasteurized if concerned"],
+  pairingSuggestions: ["Espresso", "Coffee", "Sweet wine"],
+  isFavorite: false,
+  tags: ["italian", "dessert", "no-bake", "coffee", "elegant"]
+}
+
+// ==========================================
+// CONTINUED IN BATCH 3...
+// ==========================================

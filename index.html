@@ -26,6 +26,88 @@
             min-height: 100vh;
             overflow-x: hidden;
             background: linear-gradient(135deg, #1a472a 0%, #0e2a1a 100%);
+            position: relative;
+        }
+        
+        /* Dynamic Background Overlay for Depth - CHANGES WITH CATEGORY */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            z-index: -1;
+            transition: background-image 0.6s ease-in-out;
+        }
+        
+        /* Category-Specific Background Images - PROFESSIONAL FOOD PHOTOGRAPHY */
+        body[data-category="all"]::before {
+            background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg');
+        }
+        
+        body[data-category="🇰🇪 Kenyan Classics"]::before {
+            background-image: url('https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg');
+        }
+        
+        body[data-category="🇰🇪 Kenyan Stews"]::before {
+            background-image: url('https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg');
+        }
+        
+        body[data-category="🇰🇪 Street Food"]::before {
+            background-image: url('https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg');
+        }
+        
+        body[data-category="🍳 Breakfast"]::before {
+            background-image: url('https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg');
+        }
+        
+        body[data-category="🥗 Lunch"]::before {
+            background-image: url('https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg');
+        }
+        
+        body[data-category="🍝 Dinner"]::before {
+            background-image: url('https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg');
+        }
+        
+        body[data-category="🍰 Desserts"]::before {
+            background-image: url('https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg');
+        }
+        
+        body[data-category="🍲 Soups"]::before {
+            background-image: url('https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg');
+        }
+        
+        body[data-category="🌱 Vegetarian"]::before {
+            background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg');
+        }
+        
+        body[data-category="🥤 Drinks"]::before {
+            background-image: url('https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg');
+        }
+        
+        body[data-category="🇮🇹 Italian"]::before {
+            background-image: url('https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg');
+        }
+        
+        body[data-category="🇮🇳 Indian"]::before {
+            background-image: url('https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg');
+        }
+        
+        body[data-category="🇨🇳 Asian"]::before {
+            background-image: url('https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg');
+        }
+        
+        body[data-category="favorites"]::before {
+            background-image: url('https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg');
+        }
+        
+        body[data-category="search"]::before {
+            background-image: url('https://images.pexels.com/photos/5946991/pexels-photo-5946991.jpeg');
         }
 
         :root {
@@ -33,14 +115,14 @@
             --primary-dark: #1b4d3e;
             --primary-light: #40916c;
             --accent-color: #ffd966;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.92);
             --bg-overlay: rgba(0, 0, 0, 0.4);
         }
 
         .theme-purple { --primary-color: #6c3483; --primary-dark: #4a235a; --primary-light: #8e44ad; }
         .theme-blue { --primary-color: #1a5f7a; --primary-dark: #0e3d52; --primary-light: #2e86c1; }
         .theme-orange { --primary-color: #e67e22; --primary-dark: #b85c0a; --primary-light: #f39c12; }
-        .theme-dark { --primary-color: #1e1e2f; --primary-dark: #0f0f1a; --primary-light: #2d2d44; --card-bg: rgba(30, 30, 47, 0.95); }
+        .theme-dark { --primary-color: #1e1e2f; --primary-dark: #0f0f1a; --primary-light: #2d2d44; --card-bg: rgba(30, 30, 47, 0.92); }
         .theme-pink { --primary-color: #c0395e; --primary-dark: #8e2446; --primary-light: #e74c7c; }
 
         body {
@@ -53,7 +135,8 @@
             margin: 0 auto;
             min-height: 100vh;
             position: relative;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.05);
+            backdrop-filter: blur(1px);
         }
 
         .header {
@@ -63,6 +146,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .header h1 {
@@ -90,26 +174,34 @@
             border-radius: 20px;
             font-size: 12px;
             cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s;
+        }
+        
+        .favorites-link:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         .search-bar {
             padding: 12px 16px;
             background: var(--card-bg);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
         }
 
         .search-bar input {
             width: 100%;
             padding: 14px 16px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(0,0,0,0.1);
             border-radius: 30px;
             font-size: 14px;
             background: white;
+            transition: all 0.3s;
         }
 
         .search-bar input:focus {
             outline: none;
             border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .category-tabs {
@@ -117,6 +209,7 @@
             overflow-x: auto;
             padding: 12px 8px;
             background: var(--card-bg);
+            backdrop-filter: blur(8px);
             gap: 6px;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
@@ -124,7 +217,7 @@
 
         .category-tab {
             padding: 8px 16px;
-            background: #f0f0f0;
+            background: rgba(0,0,0,0.05);
             border: none;
             border-radius: 25px;
             font-size: 12px;
@@ -132,11 +225,13 @@
             cursor: pointer;
             color: #333;
             flex-shrink: 0;
+            transition: all 0.3s;
         }
 
         .category-tab.active {
             background: var(--primary-color);
             color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .section-title {
@@ -145,13 +240,14 @@
             font-weight: bold;
             color: var(--primary-color);
             background: var(--card-bg);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: space-between;
         }
 
         .recipe-list {
             padding: 8px 12px 20px;
-            background: var(--card-bg);
+            background: transparent;
             min-height: 300px;
         }
 
@@ -160,16 +256,18 @@
             align-items: center;
             padding: 12px;
             margin-bottom: 8px;
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
             border-radius: 14px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .recipe-card:hover {
             transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
         }
 
         .recipe-image {
@@ -181,6 +279,7 @@
             margin-right: 12px;
             flex-shrink: 0;
             background-color: #f0f0f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .recipe-info {
@@ -205,17 +304,21 @@
             cursor: pointer;
             padding: 8px;
             color: #ccc;
-            transition: color 0.2s;
+            transition: all 0.2s;
         }
 
         .favorite-star.active {
             color: #ffd966;
+            text-shadow: 0 2px 8px rgba(255,217,102,0.4);
         }
 
         .empty-state {
             text-align: center;
             padding: 40px 20px;
-            color: #999;
+            color: rgba(255,255,255,0.8);
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 14px;
         }
 
         .fab {
@@ -233,13 +336,20 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             margin: 20px auto;
             display: block;
             text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .fab:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
         }
 
-        /* Recipe Detail Modal */
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -247,7 +357,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             overflow-y: auto;
         }
@@ -267,7 +378,7 @@
         .modal-header {
             position: sticky;
             top: 0;
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             padding: 16px;
             display: flex;
@@ -388,6 +499,7 @@
             border-radius: 14px;
             font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         .btn-edit {
@@ -400,12 +512,6 @@
             color: white;
         }
 
-        .btn-favorite-large {
-            background: #f0f0f0;
-            color: #333;
-        }
-
-        /* Add Recipe Form */
         .form-group {
             margin-bottom: 18px;
         }
@@ -432,33 +538,10 @@
             resize: vertical;
         }
 
-        .ingredient-input-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .ingredient-input-group input {
-            flex: 1;
-        }
-
-        .btn-small {
-            padding: 8px 16px;
-            background: var(--primary-light);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .btn-remove {
-            background: #dc3545;
-            padding: 8px 12px;
-        }
-
+        /* Dark Mode Adjustments */
         .theme-dark .recipe-card {
-            background: #2d2d44;
+            background: rgba(30, 30, 47, 0.92);
+            border-color: rgba(255,255,255,0.1);
         }
         
         .theme-dark .recipe-info h3 {
@@ -631,6 +714,9 @@
             // Apply theme
             document.body.className = `theme-${config.theme}`;
             
+            // Set default background
+            document.body.setAttribute('data-category', 'all');
+            
             // Load recipes
             if (typeof RECIPE_DATABASE !== 'undefined') {
                 recipes = RECIPE_DATABASE;
@@ -663,12 +749,27 @@
 
         function selectCategory(category) {
             currentCategory = category;
+            
+            // Update body data attribute for background
+            document.body.setAttribute('data-category', category);
+            
+            // Update list title
+            document.getElementById('listTitle').innerHTML = category === 'All' ? 'All Recipes' : category;
+            
             renderCategoryTabs();
             renderRecipes();
         }
 
         function searchRecipes() {
             searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Update background for search
+            if (searchTerm) {
+                document.body.setAttribute('data-category', 'search');
+            } else {
+                document.body.setAttribute('data-category', currentCategory === 'All' ? 'all' : currentCategory);
+            }
+            
             renderRecipes();
         }
 
@@ -731,6 +832,9 @@
         }
 
         function showFavorites() {
+            // Update background for favorites
+            document.body.setAttribute('data-category', 'favorites');
+            
             currentCategory = 'All';
             searchTerm = '';
             document.getElementById('searchInput').value = '';
@@ -740,6 +844,8 @@
             if (favorites.length === 0) {
                 document.getElementById('recipeList').innerHTML = 
                     '<div class="empty-state">⭐ No favorites yet<br>Tap the star on recipes you love!</div>';
+                document.getElementById('listTitle').innerHTML = '⭐ Favorite Recipes';
+                document.getElementById('recipeCount').innerHTML = '0 favorites';
             } else {
                 const html = favorites.map(recipe => `
                     <div class="recipe-card" onclick="showRecipeDetail('${recipe.id}')">
@@ -756,10 +862,9 @@
                     </div>
                 `).join('');
                 document.getElementById('recipeList').innerHTML = html;
+                document.getElementById('listTitle').innerHTML = '⭐ Favorite Recipes';
+                document.getElementById('recipeCount').innerHTML = `${favorites.length} favorites`;
             }
-            
-            document.getElementById('listTitle').innerHTML = '⭐ Favorite Recipes';
-            document.getElementById('recipeCount').innerHTML = `${favorites.length} favorites`;
         }
 
         // ========== FAVORITES ==========
@@ -836,7 +941,6 @@
             document.getElementById('ingredientsInput').value = '';
             document.getElementById('instructionsInput').value = '';
             
-            // Populate category dropdown
             const select = document.getElementById('recipeCategoryInput');
             select.innerHTML = config.categories.map(c => `<option value="${c}">${c}</option>`).join('');
             
@@ -899,22 +1003,18 @@
                 tags: ['custom']
             };
             
-            // Get existing custom recipes
             let customRecipes = JSON.parse(localStorage.getItem('chef_custom_recipes')) || [];
             
             if (editingRecipeId) {
-                // Update existing
                 const index = customRecipes.findIndex(r => r.id === editingRecipeId);
                 if (index >= 0) {
                     customRecipes[index] = recipeData;
                 }
-                // Also update in main recipes array
                 const mainIndex = recipes.findIndex(r => r.id === editingRecipeId);
                 if (mainIndex >= 0) {
                     recipes[mainIndex] = recipeData;
                 }
             } else {
-                // Add new
                 customRecipes.push(recipeData);
                 recipes.unshift(recipeData);
             }
@@ -930,15 +1030,12 @@
             if (!currentRecipe) return;
             
             if (confirm(`Delete "${currentRecipe.name}"? This cannot be undone.`)) {
-                // Remove from custom recipes
                 let customRecipes = JSON.parse(localStorage.getItem('chef_custom_recipes')) || [];
                 customRecipes = customRecipes.filter(r => r.id !== currentRecipe.id);
                 localStorage.setItem('chef_custom_recipes', JSON.stringify(customRecipes));
                 
-                // Remove from main array
                 recipes = recipes.filter(r => r.id !== currentRecipe.id);
                 
-                // Remove from favorites
                 userFavorites = userFavorites.filter(id => id !== currentRecipe.id);
                 localStorage.setItem('chef_favorites', JSON.stringify(userFavorites));
                 

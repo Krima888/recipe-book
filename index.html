@@ -401,7 +401,6 @@
         .step-number { width: 28px; height: 28px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
         .step-text { flex: 1; line-height: 1.6; font-weight: 500; }
         
-        /* Action buttons layout: Edit, Save, Delete side by side */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -702,30 +701,64 @@
         function showRecipeDetail(recipeId) { const recipe = recipes.find(r => r.id === recipeId); if (!recipe) return; currentRecipe = recipe; document.getElementById('modalRecipeName').innerHTML = recipe.name; document.getElementById('modalRecipeImage').style.backgroundImage = `url('${recipe.image || config.defaultRecipeImage}')`; document.getElementById('modalPrepTime').innerHTML = recipe.prepTime; document.getElementById('modalCookTime').innerHTML = recipe.cookTime; document.getElementById('modalServings').innerHTML = recipe.servings; document.getElementById('modalFavoriteStar').innerHTML = recipe.isFavorite ? '★' : '☆'; document.getElementById('modalIngredients').innerHTML = recipe.ingredients.map(i => `<div class="ingredient-item">${i}</div>`).join(''); document.getElementById('modalInstructions').innerHTML = recipe.instructions.map((step, idx) => `<div class="instruction-step"><div class="step-number">${idx + 1}</div><div class="step-text">${step}</div></div>`).join(''); document.getElementById('recipeModal').classList.add('active'); }
         function closeRecipeModal() { document.getElementById('recipeModal').classList.remove('active'); currentRecipe = null; }
         
-        // ===== NEW DOWNLOAD FUNCTION =====
+        // ===== PROFESSIONAL DOWNLOAD FUNCTION =====
         function downloadRecipe() {
             if (!currentRecipe) return;
             
-            // Format recipe as readable text
-            let content = `👨‍🍳 ${currentRecipe.name}\n`;
-            content += `${'='.repeat(currentRecipe.name.length + 2)}\n\n`;
-            content += `📊 Category: ${currentRecipe.category}\n`;
-            content += `⏱️ Prep Time: ${currentRecipe.prepTime}\n`;
-            content += `⏱️ Cook Time: ${currentRecipe.cookTime}\n`;
-            content += `👥 Servings: ${currentRecipe.servings}\n`;
-            if (currentRecipe.difficulty) content += `📈 Difficulty: ${currentRecipe.difficulty}\n`;
-            content += `\n📝 INGREDIENTS:\n${'-'.repeat(20)}\n`;
-            currentRecipe.ingredients.forEach(i => content += `• ${i}\n`);
-            content += `\n👨‍🍳 INSTRUCTIONS:\n${'-'.repeat(20)}\n`;
-            currentRecipe.instructions.forEach((step, idx) => content += `${idx + 1}. ${step}\n`);
+            // Create a beautifully formatted recipe card
+            const line = '─'.repeat(40);
+            const thinLine = '─'.repeat(30);
+            
+            let content = `\n${line}\n`;
+            content += `🍽️  ${currentRecipe.name.toUpperCase()}  🍽️\n`;
+            content += `${line}\n\n`;
+            
+            // Info Block
+            content += `📋 RECIPE INFORMATION\n`;
+            content += `${thinLine}\n`;
+            content += `   Category    : ${currentRecipe.category}\n`;
+            content += `   Prep Time   : ${currentRecipe.prepTime}\n`;
+            content += `   Cook Time   : ${currentRecipe.cookTime}\n`;
+            content += `   Servings    : ${currentRecipe.servings}\n`;
+            if (currentRecipe.difficulty) content += `   Difficulty  : ${currentRecipe.difficulty}\n`;
+            
+            // Ingredients Block
+            content += `\n📝 INGREDIENTS\n`;
+            content += `${thinLine}\n`;
+            currentRecipe.ingredients.forEach((item, i) => {
+                content += `   ${(i + 1).toString().padStart(2, ' ')}. ${item}\n`;
+            });
+            
+            // Instructions Block
+            content += `\n👨‍🍳 STEP-BY-STEP INSTRUCTIONS\n`;
+            content += `${thinLine}\n`;
+            currentRecipe.instructions.forEach((step, i) => {
+                content += `\n   STEP ${i + 1}:\n   ${step}\n`;
+            });
+            
+            // Chef's Tips (if available)
             if (currentRecipe.chefTips && currentRecipe.chefTips.length) {
-                content += `\n💡 CHEF'S TIPS:\n${'-'.repeat(20)}\n`;
-                currentRecipe.chefTips.forEach(tip => content += `• ${tip}\n`);
+                content += `\n💡 CHEF'S TIPS\n`;
+                content += `${thinLine}\n`;
+                currentRecipe.chefTips.forEach((tip, i) => {
+                    content += `   • ${tip}\n`;
+                });
             }
+            
+            // Pairing Suggestions (if available)
             if (currentRecipe.pairingSuggestions && currentRecipe.pairingSuggestions.length) {
-                content += `\n🍷 PAIRING SUGGESTIONS:\n${'-'.repeat(20)}\n`;
-                currentRecipe.pairingSuggestions.forEach(p => content += `• ${p}\n`);
+                content += `\n🍷 PAIRING SUGGESTIONS\n`;
+                content += `${thinLine}\n`;
+                currentRecipe.pairingSuggestions.forEach((item, i) => {
+                    content += `   • ${item}\n`;
+                });
             }
+            
+            // Footer
+            content += `\n${line}\n`;
+            content += `   Bon Appétit! 👨‍🍳\n`;
+            content += `   Generated by Chef's Recipe Book\n`;
+            content += `${line}\n`;
             
             // Create download
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -738,8 +771,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            // Optional feedback
-            alert(`✅ "${currentRecipe.name}" recipe downloaded!`);
+            alert(`✅ "${currentRecipe.name}" recipe downloaded successfully!`);
         }
         
         function openAddRecipeModal() { editingRecipeId = null; document.getElementById('addModalTitle').innerHTML = '➕ Add New Recipe'; document.getElementById('recipeNameInput').value = ''; document.getElementById('recipeImageInput').value = ''; document.getElementById('prepTimeInput').value = ''; document.getElementById('cookTimeInput').value = ''; document.getElementById('servingsInput').value = ''; document.getElementById('ingredientsInput').value = ''; document.getElementById('instructionsInput').value = ''; const select = document.getElementById('recipeCategoryInput'); select.innerHTML = config.categories.map(c => `<option value="${c}">${c}</option>`).join(''); document.getElementById('addRecipeModal').classList.add('active'); }

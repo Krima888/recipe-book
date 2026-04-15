@@ -137,6 +137,8 @@
             position: relative;
             background: rgba(0,0,0,0.05);
             backdrop-filter: blur(1px);
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
@@ -160,6 +162,13 @@
             font-size: 12px;
             opacity: 0.9;
             margin-top: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chef-name:hover {
+            opacity: 1;
+            text-decoration: underline;
         }
 
         .header-actions {
@@ -168,7 +177,12 @@
             align-items: center;
         }
 
-        .favorites-link {
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .favorites-link, .settings-link {
             background: rgba(255,255,255,0.2);
             padding: 6px 12px;
             border-radius: 20px;
@@ -178,7 +192,7 @@
             transition: all 0.3s;
         }
         
-        .favorites-link:hover {
+        .favorites-link:hover, .settings-link:hover {
             background: rgba(255,255,255,0.3);
         }
 
@@ -246,9 +260,10 @@
         }
 
         .recipe-list {
-            padding: 8px 12px 20px;
+            padding: 8px 12px;
             background: transparent;
             min-height: 300px;
+            flex: 1;
         }
 
         .recipe-card {
@@ -321,32 +336,59 @@
             border-radius: 14px;
         }
 
-        .fab {
+        /* FAB Button - Professionally Positioned */
+        .fab-container {
+            padding: 16px;
+            background: transparent;
             position: sticky;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 32px);
-            max-width: 468px;
-            background: var(--primary-color);
+            bottom: 0;
+            z-index: 5;
+        }
+        
+        .fab {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             border: none;
-            padding: 16px;
+            padding: 16px 20px;
             border-radius: 30px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            margin: 20px auto;
-            display: block;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.2);
+            letter-spacing: 0.5px;
         }
         
         .fab:hover {
-            background: var(--primary-dark);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
             box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+            transform: scale(1.01);
+        }
+        
+        .fab:active {
+            transform: scale(0.99);
+        }
+
+        /* Settings Modal */
+        .settings-section {
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
         }
 
         /* Modal Styles */
@@ -511,6 +553,11 @@
             background: #dc3545;
             color: white;
         }
+        
+        .btn-save {
+            background: var(--primary-color);
+            color: white;
+        }
 
         .form-group {
             margin-bottom: 18px;
@@ -580,9 +627,12 @@
         <div class="header">
             <div class="header-actions">
                 <h1 id="appTitle">👨‍🍳 CHEF'S RECIPE BOOK</h1>
-                <span class="favorites-link" onclick="showFavorites()">⭐ Favorites</span>
+                <div class="header-buttons">
+                    <span class="favorites-link" onclick="showFavorites()">⭐ Favorites</span>
+                    <span class="settings-link" onclick="openSettingsModal()">⚙️ Settings</span>
+                </div>
             </div>
-            <div class="chef-name" id="chefName">Chef Priscilla</div>
+            <div class="chef-name" id="chefName" onclick="openSettingsModal()">Chef Priscilla</div>
         </div>
 
         <div class="search-bar">
@@ -598,7 +648,57 @@
 
         <div class="recipe-list" id="recipeList"></div>
 
-        <button class="fab" onclick="openAddRecipeModal()">➕ ADD NEW RECIPE</button>
+        <div class="fab-container">
+            <button class="fab" onclick="openAddRecipeModal()">
+                <span>➕</span> ADD NEW RECIPE
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="closeSettingsModal()">←</button>
+                <h2>⚙️ Settings</h2>
+                <span></span>
+            </div>
+            <div class="recipe-detail-content">
+                <div class="settings-section">
+                    <h3>👤 Chef Information</h3>
+                    <div class="form-group">
+                        <label>Chef Name</label>
+                        <input type="text" id="settingsChefName" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label>App Title</label>
+                        <input type="text" id="settingsAppTitle" placeholder="App title">
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>🎨 Appearance</h3>
+                    <div class="form-group">
+                        <label>Theme Color</label>
+                        <select id="settingsTheme">
+                            <option value="green">🌿 Green (Default)</option>
+                            <option value="purple">👑 Purple</option>
+                            <option value="blue">🌊 Blue</option>
+                            <option value="orange">🌅 Orange</option>
+                            <option value="dark">🌙 Dark</option>
+                            <option value="pink">🌸 Pink</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-save" onclick="saveSettings()">💾 SAVE SETTINGS</button>
+                </div>
+                <p style="text-align: center; font-size: 11px; color: #999; margin-top: 20px;">
+                    Settings are saved to your device
+                </p>
+            </div>
+        </div>
     </div>
 
     <!-- Recipe Detail Modal -->
@@ -708,6 +808,20 @@
             categories: ["Breakfast", "Lunch", "Dinner", "Desserts"],
             features: { favorites: true, search: true }
         };
+        
+        // Load saved settings from localStorage
+        function loadSavedSettings() {
+            const saved = localStorage.getItem('chef_settings');
+            if (saved) {
+                try {
+                    const settings = JSON.parse(saved);
+                    config.appTitle = settings.appTitle || config.appTitle;
+                    config.chefName = settings.chefName || config.chefName;
+                    config.theme = settings.theme || config.theme;
+                } catch(e) {}
+            }
+        }
+        loadSavedSettings();
 
         // ========== INITIALIZATION ==========
         function init() {
@@ -730,12 +844,52 @@
             recipes.forEach(r => r.isFavorite = userFavorites.includes(r.id));
             
             // Update UI
-            document.getElementById('appTitle').innerHTML = config.appTitle;
-            document.getElementById('chefName').innerHTML = config.chefName;
+            updateHeaderInfo();
             
             renderCategoryTabs();
             renderRecipes();
             updateRecipeCount();
+        }
+        
+        function updateHeaderInfo() {
+            document.getElementById('appTitle').innerHTML = config.appTitle;
+            document.getElementById('chefName').innerHTML = config.chefName;
+        }
+
+        // ========== SETTINGS MODAL ==========
+        function openSettingsModal() {
+            document.getElementById('settingsChefName').value = config.chefName;
+            document.getElementById('settingsAppTitle').value = config.appTitle;
+            document.getElementById('settingsTheme').value = config.theme;
+            document.getElementById('settingsModal').classList.add('active');
+        }
+        
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+        
+        function saveSettings() {
+            config.chefName = document.getElementById('settingsChefName').value.trim() || 'Chef';
+            config.appTitle = document.getElementById('settingsAppTitle').value.trim() || "👨‍🍳 CHEF'S RECIPE BOOK";
+            config.theme = document.getElementById('settingsTheme').value;
+            
+            // Save to localStorage
+            localStorage.setItem('chef_settings', JSON.stringify({
+                chefName: config.chefName,
+                appTitle: config.appTitle,
+                theme: config.theme
+            }));
+            
+            // Apply theme
+            document.body.className = `theme-${config.theme}`;
+            
+            // Update header
+            updateHeaderInfo();
+            
+            closeSettingsModal();
+            
+            // Show confirmation
+            alert('✅ Settings saved successfully!');
         }
 
         // ========== RENDER FUNCTIONS ==========
@@ -993,7 +1147,7 @@
                 id: editingRecipeId || 'custom_' + Date.now(),
                 name,
                 category,
-                image: image || config.defaultRecipeImage,
+                image: image || 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
                 prepTime: prepTime || '10 min',
                 cookTime: cookTime || '20 min',
                 servings: servings || '4 people',
@@ -1044,6 +1198,23 @@
                 alert('🗑️ Recipe deleted');
             }
         }
+
+        // Make functions global
+        window.openSettingsModal = openSettingsModal;
+        window.closeSettingsModal = closeSettingsModal;
+        window.saveSettings = saveSettings;
+        window.selectCategory = selectCategory;
+        window.searchRecipes = searchRecipes;
+        window.showFavorites = showFavorites;
+        window.toggleFavorite = toggleFavorite;
+        window.toggleFavoriteFromModal = toggleFavoriteFromModal;
+        window.showRecipeDetail = showRecipeDetail;
+        window.closeRecipeModal = closeRecipeModal;
+        window.openAddRecipeModal = openAddRecipeModal;
+        window.closeAddRecipeModal = closeAddRecipeModal;
+        window.editCurrentRecipe = editCurrentRecipe;
+        window.saveRecipe = saveRecipe;
+        window.deleteCurrentRecipe = deleteCurrentRecipe;
 
         // ========== START APP ==========
         init();

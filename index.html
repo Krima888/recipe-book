@@ -29,7 +29,6 @@
             position: relative;
         }
         
-        /* Dynamic Background Overlay */
         body::before {
             content: '';
             position: fixed;
@@ -92,7 +91,6 @@
             flex-direction: column;
         }
 
-        /* ===== BOLD GLOWING HEADER ===== */
         .header {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             padding: 18px 16px;
@@ -217,7 +215,6 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        /* ===== HORIZONTAL SCROLL LAYOUT ===== */
         .recipe-list {
             padding: 16px 8px 20px;
             background: transparent;
@@ -230,15 +227,13 @@
             gap: 18px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
         
-        .recipe-list::-webkit-scrollbar {
-            display: none;  /* Chrome/Safari */
-        }
+        .recipe-list::-webkit-scrollbar { display: none; }
 
         .recipe-card {
-            flex: 0 0 160px; /* Fixed width for horizontal cards */
+            flex: 0 0 160px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -251,9 +246,7 @@
             scroll-snap-align: start;
         }
         
-        .recipe-card:hover {
-            transform: translateY(-5px);
-        }
+        .recipe-card:hover { transform: translateY(-5px); }
 
         .recipe-image-wrapper {
             position: relative;
@@ -267,9 +260,7 @@
             overflow: hidden;
         }
         
-        .theme-dark .recipe-image-wrapper {
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,217,102,0.3);
-        }
+        .theme-dark .recipe-image-wrapper { box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,217,102,0.3); }
 
         .recipe-image {
             width: 100%;
@@ -279,9 +270,7 @@
             transition: transform 0.4s ease;
         }
         
-        .recipe-card:hover .recipe-image {
-            transform: scale(1.08);
-        }
+        .recipe-card:hover .recipe-image { transform: scale(1.08); }
 
         .favorite-star {
             position: absolute;
@@ -311,15 +300,8 @@
             transform: scale(1.1);
         }
         
-        .theme-dark .favorite-star {
-            background: rgba(30,30,47,0.95);
-            color: #666;
-            border-color: #444;
-        }
-        .theme-dark .favorite-star.active {
-            color: #ffd966;
-            background: #2d2d44;
-        }
+        .theme-dark .favorite-star { background: rgba(30,30,47,0.95); color: #666; border-color: #444; }
+        .theme-dark .favorite-star.active { color: #ffd966; background: #2d2d44; }
 
         .recipe-info {
             margin-top: 12px;
@@ -338,10 +320,7 @@
             text-shadow: 0 1px 3px rgba(255,255,255,0.5);
         }
         
-        .theme-dark .recipe-info h3 {
-            color: white;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
-        }
+        .theme-dark .recipe-info h3 { color: white; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
 
         .recipe-meta {
             display: flex;
@@ -352,9 +331,7 @@
             color: #555;
         }
         
-        .theme-dark .recipe-meta {
-            color: #ccc;
-        }
+        .theme-dark .recipe-meta { color: #ccc; }
 
         .empty-state {
             flex: 1 0 100%;
@@ -368,7 +345,6 @@
             scroll-snap-align: center;
         }
 
-        /* FAB Button */
         .fab-container {
             padding: 16px;
             background: transparent;
@@ -401,7 +377,6 @@
         .fab:hover { background: linear-gradient(135deg, var(--primary-dark), var(--primary-color)); box-shadow: 0 6px 25px rgba(0,0,0,0.4), 0 0 20px var(--accent-color); transform: scale(1.02); }
         .fab:active { transform: scale(0.98); }
 
-        /* Modals */
         .settings-section { padding: 16px 0; border-bottom: 1px solid #eee; }
         .settings-section:last-child { border-bottom: none; }
         .settings-section h3 { font-size: 16px; margin-bottom: 16px; color: var(--primary-color); font-weight: 800; }
@@ -425,11 +400,29 @@
         .instruction-step { padding: 12px 0; border-bottom: 1px solid #f5f5f5; display: flex; gap: 12px; }
         .step-number { width: 28px; height: 28px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
         .step-text { flex: 1; line-height: 1.6; font-weight: 500; }
-        .action-buttons { display: flex; gap: 10px; padding: 20px; }
-        .action-buttons button { flex: 1; padding: 14px; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Action buttons layout: Edit, Save, Delete side by side */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            padding: 20px;
+        }
+        .action-buttons button {
+            flex: 1;
+            padding: 14px 8px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 13px;
+        }
         .btn-edit { background: var(--accent-color); color: #333; }
+        .btn-save { background: var(--primary-light); color: white; }
         .btn-delete { background: #dc3545; color: white; }
-        .btn-save { background: var(--primary-color); color: white; }
+        
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 6px; font-weight: 800; color: var(--primary-color); font-size: 13px; text-transform: uppercase; letter-spacing: 0.3px; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; font-family: inherit; font-weight: 500; }
@@ -527,6 +520,7 @@
                 <div class="instructions-section"><h3>👨‍🍳 Instructions</h3><div id="modalInstructions"></div></div>
                 <div class="action-buttons">
                     <button class="btn-edit" onclick="editCurrentRecipe()">✏️ EDIT</button>
+                    <button class="btn-save" onclick="downloadRecipe()">💾 SAVE</button>
                     <button class="btn-delete" onclick="deleteCurrentRecipe()">🗑️ DELETE</button>
                 </div>
             </div>
@@ -707,6 +701,47 @@
         function toggleFavoriteFromModal() { if (currentRecipe) { toggleFavorite(currentRecipe.id); closeRecipeModal(); setTimeout(() => showRecipeDetail(currentRecipe.id), 50); } }
         function showRecipeDetail(recipeId) { const recipe = recipes.find(r => r.id === recipeId); if (!recipe) return; currentRecipe = recipe; document.getElementById('modalRecipeName').innerHTML = recipe.name; document.getElementById('modalRecipeImage').style.backgroundImage = `url('${recipe.image || config.defaultRecipeImage}')`; document.getElementById('modalPrepTime').innerHTML = recipe.prepTime; document.getElementById('modalCookTime').innerHTML = recipe.cookTime; document.getElementById('modalServings').innerHTML = recipe.servings; document.getElementById('modalFavoriteStar').innerHTML = recipe.isFavorite ? '★' : '☆'; document.getElementById('modalIngredients').innerHTML = recipe.ingredients.map(i => `<div class="ingredient-item">${i}</div>`).join(''); document.getElementById('modalInstructions').innerHTML = recipe.instructions.map((step, idx) => `<div class="instruction-step"><div class="step-number">${idx + 1}</div><div class="step-text">${step}</div></div>`).join(''); document.getElementById('recipeModal').classList.add('active'); }
         function closeRecipeModal() { document.getElementById('recipeModal').classList.remove('active'); currentRecipe = null; }
+        
+        // ===== NEW DOWNLOAD FUNCTION =====
+        function downloadRecipe() {
+            if (!currentRecipe) return;
+            
+            // Format recipe as readable text
+            let content = `👨‍🍳 ${currentRecipe.name}\n`;
+            content += `${'='.repeat(currentRecipe.name.length + 2)}\n\n`;
+            content += `📊 Category: ${currentRecipe.category}\n`;
+            content += `⏱️ Prep Time: ${currentRecipe.prepTime}\n`;
+            content += `⏱️ Cook Time: ${currentRecipe.cookTime}\n`;
+            content += `👥 Servings: ${currentRecipe.servings}\n`;
+            if (currentRecipe.difficulty) content += `📈 Difficulty: ${currentRecipe.difficulty}\n`;
+            content += `\n📝 INGREDIENTS:\n${'-'.repeat(20)}\n`;
+            currentRecipe.ingredients.forEach(i => content += `• ${i}\n`);
+            content += `\n👨‍🍳 INSTRUCTIONS:\n${'-'.repeat(20)}\n`;
+            currentRecipe.instructions.forEach((step, idx) => content += `${idx + 1}. ${step}\n`);
+            if (currentRecipe.chefTips && currentRecipe.chefTips.length) {
+                content += `\n💡 CHEF'S TIPS:\n${'-'.repeat(20)}\n`;
+                currentRecipe.chefTips.forEach(tip => content += `• ${tip}\n`);
+            }
+            if (currentRecipe.pairingSuggestions && currentRecipe.pairingSuggestions.length) {
+                content += `\n🍷 PAIRING SUGGESTIONS:\n${'-'.repeat(20)}\n`;
+                currentRecipe.pairingSuggestions.forEach(p => content += `• ${p}\n`);
+            }
+            
+            // Create download
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentRecipe.name.replace(/\s+/g, '_')}_Recipe.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Optional feedback
+            alert(`✅ "${currentRecipe.name}" recipe downloaded!`);
+        }
+        
         function openAddRecipeModal() { editingRecipeId = null; document.getElementById('addModalTitle').innerHTML = '➕ Add New Recipe'; document.getElementById('recipeNameInput').value = ''; document.getElementById('recipeImageInput').value = ''; document.getElementById('prepTimeInput').value = ''; document.getElementById('cookTimeInput').value = ''; document.getElementById('servingsInput').value = ''; document.getElementById('ingredientsInput').value = ''; document.getElementById('instructionsInput').value = ''; const select = document.getElementById('recipeCategoryInput'); select.innerHTML = config.categories.map(c => `<option value="${c}">${c}</option>`).join(''); document.getElementById('addRecipeModal').classList.add('active'); }
         function closeAddRecipeModal() { document.getElementById('addRecipeModal').classList.remove('active'); editingRecipeId = null; }
         function editCurrentRecipe() { if (!currentRecipe) return; editingRecipeId = currentRecipe.id; document.getElementById('addModalTitle').innerHTML = '✏️ Edit Recipe'; document.getElementById('recipeNameInput').value = currentRecipe.name; document.getElementById('recipeImageInput').value = currentRecipe.image || ''; document.getElementById('prepTimeInput').value = currentRecipe.prepTime; document.getElementById('cookTimeInput').value = currentRecipe.cookTime; document.getElementById('servingsInput').value = currentRecipe.servings; document.getElementById('ingredientsInput').value = currentRecipe.ingredients.join('\n'); document.getElementById('instructionsInput').value = currentRecipe.instructions.join('\n'); const select = document.getElementById('recipeCategoryInput'); select.innerHTML = config.categories.map(c => `<option value="${c}" ${c === currentRecipe.category ? 'selected' : ''}>${c}</option>`).join(''); closeRecipeModal(); document.getElementById('addRecipeModal').classList.add('active'); }
@@ -716,7 +751,8 @@
         window.openSettingsModal = openSettingsModal; window.closeSettingsModal = closeSettingsModal; window.saveSettings = saveSettings;
         window.selectCategory = selectCategory; window.searchRecipes = searchRecipes; window.showFavorites = showFavorites;
         window.toggleFavorite = toggleFavorite; window.toggleFavoriteFromModal = toggleFavoriteFromModal; window.showRecipeDetail = showRecipeDetail;
-        window.closeRecipeModal = closeRecipeModal; window.openAddRecipeModal = openAddRecipeModal; window.closeAddRecipeModal = closeAddRecipeModal;
+        window.closeRecipeModal = closeRecipeModal; window.downloadRecipe = downloadRecipe; 
+        window.openAddRecipeModal = openAddRecipeModal; window.closeAddRecipeModal = closeAddRecipeModal;
         window.editCurrentRecipe = editCurrentRecipe; window.saveRecipe = saveRecipe; window.deleteCurrentRecipe = deleteCurrentRecipe;
 
         init();

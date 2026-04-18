@@ -219,7 +219,6 @@
             padding: 16px 8px 20px;
             background: transparent;
             flex: 1;
-            
             display: flex;
             flex-wrap: nowrap;
             overflow-x: auto;
@@ -377,6 +376,66 @@
         .fab:hover { background: linear-gradient(135deg, var(--primary-dark), var(--primary-color)); box-shadow: 0 6px 25px rgba(0,0,0,0.4), 0 0 20px var(--accent-color); transform: scale(1.02); }
         .fab:active { transform: scale(0.98); }
 
+        /* Cost Display Card */
+        .cost-card {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 20px;
+            padding: 16px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cost-info h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .cost-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        .cost-per-serving {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        .manage-prices-btn {
+            background: transparent;
+            border: 1.5px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: auto;
+        }
+        .manage-prices-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .theme-dark .cost-card {
+            background: #2d2d44;
+            border-left-color: var(--accent-color);
+        }
+        .theme-dark .cost-info h4 { color: #eee; }
+        .theme-dark .cost-amount { color: var(--accent-color); }
+        .theme-dark .cost-per-serving { color: #aaa; }
+        .theme-dark .manage-prices-btn {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .theme-dark .manage-prices-btn:hover {
+            background: var(--accent-color);
+            color: #1e1e2f;
+        }
+
         .settings-section { padding: 16px 0; border-bottom: 1px solid #eee; }
         .settings-section:last-child { border-bottom: none; }
         .settings-section h3 { font-size: 16px; margin-bottom: 16px; color: var(--primary-color); font-weight: 800; }
@@ -427,10 +486,29 @@
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; font-family: inherit; font-weight: 500; }
         .form-group textarea { min-height: 100px; resize: vertical; }
 
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .price-row span:first-child {
+            flex: 2;
+            font-weight: 500;
+        }
+        .price-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1.5px solid #ddd;
+        }
+
         .theme-dark .modal-content { background: #1e1e2f; color: white; }
         .theme-dark .ingredients-section h3, .theme-dark .instructions-section h3 { color: #ffd966; }
         .theme-dark .form-group label { color: #ffd966; }
         .theme-dark input, .theme-dark textarea, .theme-dark select { background: #2d2d44; color: white; border-color: #444; }
+        .theme-dark .price-row { border-bottom-color: #444; }
     </style>
 </head>
 <body>
@@ -515,12 +593,41 @@
                     <div class="stat"><span class="stat-label">Cook Time</span><span class="stat-value" id="modalCookTime"></span></div>
                     <div class="stat"><span class="stat-label">Servings</span><span class="stat-value" id="modalServings"></span></div>
                 </div>
+                
+                <!-- Cost Estimator Card -->
+                <div class="cost-card" id="costCard">
+                    <div class="cost-info">
+                        <h4>💰 ESTIMATED COST</h4>
+                        <div class="cost-amount" id="totalCostDisplay">KSH 0</div>
+                        <div class="cost-per-serving" id="costPerServingDisplay">KSH 0 per serving</div>
+                    </div>
+                    <button class="manage-prices-btn" onclick="openPriceManager()">📊 Manage Prices</button>
+                </div>
+
                 <div class="ingredients-section"><h3>📝 Ingredients</h3><div id="modalIngredients"></div></div>
                 <div class="instructions-section"><h3>👨‍🍳 Instructions</h3><div id="modalInstructions"></div></div>
                 <div class="action-buttons">
                     <button class="btn-edit" onclick="editCurrentRecipe()">✏️ EDIT</button>
                     <button class="btn-save" onclick="downloadRecipe()">💾 SAVE</button>
                     <button class="btn-delete" onclick="deleteCurrentRecipe()">🗑️ DELETE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Manager Modal -->
+    <div id="priceManagerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="closePriceManager()">←</button>
+                <h2>📊 Ingredient Prices</h2>
+                <span></span>
+            </div>
+            <div class="recipe-detail-content">
+                <p style="margin-bottom: 20px; font-size: 14px; color: #666;">Set estimated prices (KSH) for standard units (e.g., per cup, per piece).</p>
+                <div id="priceListContainer"></div>
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn-save" onclick="saveAllPrices()">💾 SAVE ALL PRICES</button>
                 </div>
             </div>
         </div>
@@ -558,6 +665,7 @@
         let searchTerm = '';
         let currentRecipe = null;
         let editingRecipeId = null;
+        let ingredientPrices = JSON.parse(localStorage.getItem('ingredient_prices')) || {};
         
         let config = typeof APP_CONFIG !== 'undefined' ? APP_CONFIG : {
             appTitle: "👨‍🍳 CHEF'S RECIPE BOOK", chefName: "Chef Priscilla", theme: "green",
@@ -586,6 +694,87 @@
         function updateHeaderInfo() {
             document.getElementById('appTitle').innerHTML = config.appTitle;
             document.getElementById('chefName').innerHTML = config.chefName;
+        }
+
+        // ========== COST CALCULATION ==========
+        function extractNumberFromIngredient(ingredient) {
+            const match = ingredient.match(/([\d\.\/]+)/);
+            if (!match) return 1;
+            const numStr = match[1];
+            if (numStr.includes('/')) {
+                const parts = numStr.split('/');
+                return parseFloat(parts[0]) / parseFloat(parts[1]);
+            }
+            return parseFloat(numStr) || 1;
+        }
+
+        function calculateRecipeCost(recipe) {
+            let total = 0;
+            recipe.ingredients.forEach(ing => {
+                const quantity = extractNumberFromIngredient(ing);
+                // Find matching price entry
+                let price = 0;
+                for (let key in ingredientPrices) {
+                    if (ing.toLowerCase().includes(key.toLowerCase())) {
+                        price = ingredientPrices[key];
+                        break;
+                    }
+                }
+                total += quantity * price;
+            });
+            return total;
+        }
+
+        function updateCostDisplay() {
+            if (!currentRecipe) return;
+            const totalCost = calculateRecipeCost(currentRecipe);
+            const servings = parseInt(currentRecipe.servings) || 4;
+            const perServing = totalCost / servings;
+            document.getElementById('totalCostDisplay').innerText = `KSH ${totalCost.toFixed(2)}`;
+            document.getElementById('costPerServingDisplay').innerText = `KSH ${perServing.toFixed(2)} per serving`;
+        }
+
+        // ========== PRICE MANAGER ==========
+        function openPriceManager() {
+            const container = document.getElementById('priceListContainer');
+            // Collect unique ingredient names from all recipes
+            const allIngredients = new Set();
+            recipes.forEach(r => {
+                r.ingredients.forEach(ing => {
+                    // Extract the main ingredient name (simple heuristic)
+                    let name = ing.replace(/^[\d\.\/\s]+/, '').split(',')[0].trim();
+                    if (name) allIngredients.add(name);
+                });
+            });
+            let html = '';
+            const sorted = Array.from(allIngredients).sort();
+            sorted.forEach(ing => {
+                const price = ingredientPrices[ing] || '';
+                html += `<div class="price-row"><span>${ing}</span><input type="number" step="0.01" min="0" placeholder="KSH" value="${price}" data-ingredient="${ing}"></div>`;
+            });
+            container.innerHTML = html || '<p>No ingredients found. Add recipes first.</p>';
+            document.getElementById('priceManagerModal').classList.add('active');
+        }
+
+        function closePriceManager() {
+            document.getElementById('priceManagerModal').classList.remove('active');
+        }
+
+        function saveAllPrices() {
+            const inputs = document.querySelectorAll('#priceListContainer input');
+            inputs.forEach(input => {
+                const ing = input.dataset.ingredient;
+                const val = parseFloat(input.value);
+                if (!isNaN(val) && val >= 0) {
+                    ingredientPrices[ing] = val;
+                } else {
+                    delete ingredientPrices[ing];
+                }
+            });
+            localStorage.setItem('ingredient_prices', JSON.stringify(ingredientPrices));
+            closePriceManager();
+            if (currentRecipe) updateCostDisplay();
+            alert('✅ Ingredient prices saved!');
         }
 
         function openSettingsModal() {
@@ -698,69 +887,36 @@
         function toggleFavorite(recipeId) { 
             const recipe = recipes.find(r => r.id === recipeId); if (recipe) { recipe.isFavorite = !recipe.isFavorite; if (recipe.isFavorite) { if (!userFavorites.includes(recipeId)) userFavorites.push(recipeId); } else { userFavorites = userFavorites.filter(id => id !== recipeId); } localStorage.setItem('chef_favorites', JSON.stringify(userFavorites)); renderRecipes(); } }
         function toggleFavoriteFromModal() { if (currentRecipe) { toggleFavorite(currentRecipe.id); closeRecipeModal(); setTimeout(() => showRecipeDetail(currentRecipe.id), 50); } }
-        function showRecipeDetail(recipeId) { const recipe = recipes.find(r => r.id === recipeId); if (!recipe) return; currentRecipe = recipe; document.getElementById('modalRecipeName').innerHTML = recipe.name; document.getElementById('modalRecipeImage').style.backgroundImage = `url('${recipe.image || config.defaultRecipeImage}')`; document.getElementById('modalPrepTime').innerHTML = recipe.prepTime; document.getElementById('modalCookTime').innerHTML = recipe.cookTime; document.getElementById('modalServings').innerHTML = recipe.servings; document.getElementById('modalFavoriteStar').innerHTML = recipe.isFavorite ? '★' : '☆'; document.getElementById('modalIngredients').innerHTML = recipe.ingredients.map(i => `<div class="ingredient-item">${i}</div>`).join(''); document.getElementById('modalInstructions').innerHTML = recipe.instructions.map((step, idx) => `<div class="instruction-step"><div class="step-number">${idx + 1}</div><div class="step-text">${step}</div></div>`).join(''); document.getElementById('recipeModal').classList.add('active'); }
+        function showRecipeDetail(recipeId) { 
+            const recipe = recipes.find(r => r.id === recipeId); if (!recipe) return; 
+            currentRecipe = recipe; 
+            document.getElementById('modalRecipeName').innerHTML = recipe.name; 
+            document.getElementById('modalRecipeImage').style.backgroundImage = `url('${recipe.image || config.defaultRecipeImage}')`; 
+            document.getElementById('modalPrepTime').innerHTML = recipe.prepTime; 
+            document.getElementById('modalCookTime').innerHTML = recipe.cookTime; 
+            document.getElementById('modalServings').innerHTML = recipe.servings; 
+            document.getElementById('modalFavoriteStar').innerHTML = recipe.isFavorite ? '★' : '☆'; 
+            document.getElementById('modalIngredients').innerHTML = recipe.ingredients.map(i => `<div class="ingredient-item">${i}</div>`).join(''); 
+            document.getElementById('modalInstructions').innerHTML = recipe.instructions.map((step, idx) => `<div class="instruction-step"><div class="step-number">${idx + 1}</div><div class="step-text">${step}</div></div>`).join(''); 
+            document.getElementById('recipeModal').classList.add('active'); 
+            updateCostDisplay();
+        }
         function closeRecipeModal() { document.getElementById('recipeModal').classList.remove('active'); currentRecipe = null; }
         
-        // ===== PROFESSIONAL DOWNLOAD FUNCTION =====
         function downloadRecipe() {
             if (!currentRecipe) return;
-            
-            // Create a beautifully formatted recipe card
             const line = '─'.repeat(40);
             const thinLine = '─'.repeat(30);
-            
-            let content = `\n${line}\n`;
-            content += `🍽️  ${currentRecipe.name.toUpperCase()}  🍽️\n`;
-            content += `${line}\n\n`;
-            
-            // Info Block
-            content += `📋 RECIPE INFORMATION\n`;
-            content += `${thinLine}\n`;
-            content += `   Category    : ${currentRecipe.category}\n`;
-            content += `   Prep Time   : ${currentRecipe.prepTime}\n`;
-            content += `   Cook Time   : ${currentRecipe.cookTime}\n`;
-            content += `   Servings    : ${currentRecipe.servings}\n`;
+            let content = `\n${line}\n🍽️  ${currentRecipe.name.toUpperCase()}  🍽️\n${line}\n\n📋 RECIPE INFORMATION\n${thinLine}\n   Category    : ${currentRecipe.category}\n   Prep Time   : ${currentRecipe.prepTime}\n   Cook Time   : ${currentRecipe.cookTime}\n   Servings    : ${currentRecipe.servings}\n`;
             if (currentRecipe.difficulty) content += `   Difficulty  : ${currentRecipe.difficulty}\n`;
-            
-            // Ingredients Block
-            content += `\n📝 INGREDIENTS\n`;
-            content += `${thinLine}\n`;
-            currentRecipe.ingredients.forEach((item, i) => {
-                content += `   ${(i + 1).toString().padStart(2, ' ')}. ${item}\n`;
-            });
-            
-            // Instructions Block
-            content += `\n👨‍🍳 STEP-BY-STEP INSTRUCTIONS\n`;
-            content += `${thinLine}\n`;
-            currentRecipe.instructions.forEach((step, i) => {
-                content += `\n   STEP ${i + 1}:\n   ${step}\n`;
-            });
-            
-            // Chef's Tips (if available)
-            if (currentRecipe.chefTips && currentRecipe.chefTips.length) {
-                content += `\n💡 CHEF'S TIPS\n`;
-                content += `${thinLine}\n`;
-                currentRecipe.chefTips.forEach((tip, i) => {
-                    content += `   • ${tip}\n`;
-                });
-            }
-            
-            // Pairing Suggestions (if available)
-            if (currentRecipe.pairingSuggestions && currentRecipe.pairingSuggestions.length) {
-                content += `\n🍷 PAIRING SUGGESTIONS\n`;
-                content += `${thinLine}\n`;
-                currentRecipe.pairingSuggestions.forEach((item, i) => {
-                    content += `   • ${item}\n`;
-                });
-            }
-            
-            // Footer
-            content += `\n${line}\n`;
-            content += `   Bon Appétit! 👨‍🍳\n`;
-            content += `   Generated by Chef's Recipe Book\n`;
-            content += `${line}\n`;
-            
-            // Create download
+            const totalCost = calculateRecipeCost(currentRecipe);
+            content += `   Est. Cost   : KSH ${totalCost.toFixed(2)}\n`;
+            content += `\n📝 INGREDIENTS\n${thinLine}\n`;
+            currentRecipe.ingredients.forEach((item, i) => { content += `   ${(i + 1).toString().padStart(2, ' ')}. ${item}\n`; });
+            content += `\n👨‍🍳 STEP-BY-STEP INSTRUCTIONS\n${thinLine}\n`;
+            currentRecipe.instructions.forEach((step, i) => { content += `\n   STEP ${i + 1}:\n   ${step}\n`; });
+            if (currentRecipe.chefTips) { content += `\n💡 CHEF'S TIPS\n${thinLine}\n`; currentRecipe.chefTips.forEach(tip => content += `   • ${tip}\n`); }
+            content += `\n${line}\n   Bon Appétit! 👨‍🍳\n   Generated by Chef's Recipe Book\n${line}\n`;
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -770,7 +926,6 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            
             alert(`✅ "${currentRecipe.name}" recipe downloaded successfully!`);
         }
         
@@ -786,6 +941,7 @@
         window.closeRecipeModal = closeRecipeModal; window.downloadRecipe = downloadRecipe; 
         window.openAddRecipeModal = openAddRecipeModal; window.closeAddRecipeModal = closeAddRecipeModal;
         window.editCurrentRecipe = editCurrentRecipe; window.saveRecipe = saveRecipe; window.deleteCurrentRecipe = deleteCurrentRecipe;
+        window.openPriceManager = openPriceManager; window.closePriceManager = closePriceManager; window.saveAllPrices = saveAllPrices;
 
         init();
     </script>

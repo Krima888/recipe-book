@@ -10,6 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#2d6a4f">
     
+    <!-- Import elegant Spanish-style font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+    
     <script src="config.js"></script>
     <script src="recipes-database.js"></script>
     
@@ -66,7 +69,7 @@
             --primary-light: #40916c;
             --accent-color: #ffd966;
             --card-bg: rgba(255, 255, 255, 0.92);
-            --glow-color: rgba(255, 217, 102, 0.5);
+            --glow-color: rgba(255, 217, 102, 0.6);
         }
 
         .theme-purple { --primary-color: #6c3483; --primary-dark: #4a235a; --primary-light: #8e44ad; }
@@ -91,39 +94,65 @@
             flex-direction: column;
         }
 
+        /* ===== SPANISH-ITALIC HEADER WITH RICH EMOJIS & SHADOWS ===== */
         .header {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            padding: 18px 16px;
+            padding: 20px 16px 18px;
             color: white;
             position: sticky;
             top: 0;
             z-index: 10;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 2px 0 rgba(255,215,0,0.3) inset;
+            border-bottom: 2px solid rgba(255,217,102,0.5);
         }
 
         .header h1 {
-            font-size: 22px;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: 24px;
             font-weight: 900;
-            letter-spacing: 1px;
+            font-style: italic;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 8px;
-            text-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--glow-color);
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.5), 0 0 20px var(--glow-color), 0 0 35px rgba(255,217,102,0.4);
+            transform: perspective(500px) rotateX(1deg);
+        }
+        
+        .header h1 span {
+            display: inline-block;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
         }
 
         .chef-name {
-            font-size: 14px;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: 16px;
             font-weight: 700;
-            opacity: 0.95;
-            margin-top: 6px;
+            font-style: italic;
+            opacity: 1;
+            margin-top: 8px;
             cursor: pointer;
             transition: all 0.3s;
-            text-shadow: 0 0 8px rgba(255,255,255,0.5);
-            letter-spacing: 0.5px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 12px rgba(255,255,255,0.4);
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .chef-name:hover { opacity: 1; text-decoration: underline; text-shadow: 0 0 12px white; }
+        .chef-name::before {
+            content: "👨‍🍳";
+            font-style: normal;
+            font-size: 18px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        }
+        
+        .chef-name:hover { 
+            opacity: 1; 
+            text-decoration: underline; 
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.7), 0 0 18px white;
+            transform: scale(1.02);
+        }
 
         .header-actions {
             display: flex;
@@ -135,17 +164,22 @@
 
         .favorites-link, .settings-link {
             background: rgba(255,255,255,0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 30px;
             font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             backdrop-filter: blur(4px);
             transition: all 0.3s;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 8px rgba(255,217,102,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
-        .favorites-link:hover, .settings-link:hover { background: rgba(255,255,255,0.4); box-shadow: 0 0 15px var(--accent-color); }
+        .favorites-link:hover, .settings-link:hover { 
+            background: rgba(255,255,255,0.4); 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3), 0 0 15px var(--accent-color); 
+            transform: translateY(-2px);
+        }
 
         .search-bar {
             padding: 12px 16px;
@@ -493,10 +527,14 @@
     <div class="app-container">
         <div class="header">
             <div class="header-actions">
-                <h1 id="appTitle">👨‍🍳 CHEF'S RECIPE BOOK</h1>
+                <h1 id="appTitle">
+                    <span>👨‍🍳</span> 
+                    <span style="font-style: italic; font-family: 'Playfair Display', serif;">El Recetario</span> 
+                    <span>🌶️🥘🍷</span>
+                </h1>
                 <div class="header-buttons">
-                    <span class="favorites-link" onclick="showFavorites()">⭐ Favorites</span>
-                    <span class="settings-link" onclick="openSettingsModal()">⚙️ Settings</span>
+                    <span class="favorites-link" onclick="showFavorites()">⭐ Favoritos</span>
+                    <span class="settings-link" onclick="openSettingsModal()">⚙️ Ajustes</span>
                 </div>
             </div>
             <div class="chef-name" id="chefName" onclick="openSettingsModal()">Chef Priscilla</div>
@@ -741,7 +779,8 @@
         }
         
         function updateHeaderInfo() {
-            document.getElementById('appTitle').innerHTML = config.appTitle;
+            // Keep the Spanish-italic title with emojis
+            document.getElementById('appTitle').innerHTML = `<span>👨‍🍳</span> <span style="font-style: italic; font-family: 'Playfair Display', serif;">El Recetario</span> <span>🌶️🥘🍷</span>`;
             document.getElementById('chefName').innerHTML = config.chefName;
         }
 

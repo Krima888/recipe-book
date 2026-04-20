@@ -1710,4 +1710,109 @@ const RECIPE_DATABASE = [
   // TOTAL: 63 PROFESSIONALLY DETAILED RECIPES
   // WITH ACCURATE, MOUTH-WATERING IMAGES
   // ==========================================
+  {
+  id: "ken017",
+  name: "Kaimati (Sweet Swahili Dumplings)",
+  category: "🇰🇪 Kenyan Classics",
+  image: "https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg",
+  prepTime: "15 min",
+  cookTime: "20 min",
+  servings: "6 people",
+  difficulty: "Intermediate",
+  equipment: ["Large bowl", "Deep pot", "Slotted spoon", "Small pot for syrup"],
+  ingredients: ["2 cups flour", "1 tsp yeast", "1/2 cup sugar", "1 cup warm water", "Pinch salt", "FOR SYRUP: 1 cup sugar, 1/2 cup water, 1 tsp cardamom", "Oil for frying"],
+  instructions: [
+    "ACTIVATE YEAST: Mix warm water with 1 tsp sugar and yeast. Let sit until FOAMY",
+    "MAKE DOUGH: Mix flour, remaining sugar, salt. Add yeast mixture. Mix into THICK batter",
+    "FIRST RISE: Cover. Let rise 1 hour until DOUBLED and BUBBLY",
+    "MAKE SYRUP: Combine sugar, water, cardamom. Simmer 5 minutes until SLIGHTLY THICK. Keep WARM",
+    "HEAT OIL: Heat oil to 170°C (340°F)",
+    "DROP BATTER: Drop walnut-sized balls into oil",
+    "FRY: Fry until GOLDEN BROWN all over (3-4 minutes)",
+    "COAT: IMMEDIATELY drop hot kaimati into warm syrup. Stir to coat",
+    "SERVE: Serve warm or at room temperature"
+  ],
+  chefTips: ["Batter should be thick enough to hold shape", "Coat in syrup while HOT", "Rose water adds authentic Swahili flavor"],
+  pairingSuggestions: ["Chai", "Coffee", "As dessert after pilau"],
+  isFavorite: false,
+  tags: ["dessert", "sweet", "swahili", "kenyan"]
+},
+
+{
+  id: "ken018",
+  name: "Samaki wa Kupaka (Grilled Fish in Coconut Sauce)",
+  category: "🇰🇪 Kenyan Classics",
+  image: "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg",
+  prepTime: "15 min",
+  cookTime: "25 min",
+  servings: "4 people",
+  difficulty: "Intermediate",
+  equipment: ["Grill", "Large pan", "Tongs", "Basting brush"],
+  ingredients: ["4 whole tilapia fish, scored", "1 can coconut milk", "2 tbsp tamarind paste", "3 cloves garlic", "1 tbsp ginger", "1 tsp turmeric", "1 tsp chili", "Salt", "Lemon juice", "Fresh coriander"],
+  instructions: [
+    "PREP FISH: Score fish. Rub with salt and lemon juice. Let sit 15 minutes",
+    "PAT DRY: Pat fish COMPLETELY DRY",
+    "GRILL FISH: Grill over medium-high heat 5-7 minutes per side until CHARRED. Keep warm",
+    "START SAUCE: Heat oil. Add garlic and ginger. Cook 30 seconds",
+    "SPICES: Add turmeric and chili. Cook 30 seconds",
+    "ADD COCONUT: Add coconut milk and tamarind. Simmer 5-7 minutes until THICKENS",
+    "SEASON: Add salt and lemon juice",
+    "COMBINE: Place grilled fish in sauce. Spoon sauce over fish. Simmer 5 minutes",
+    "GARNISH: Sprinkle with fresh coriander",
+    "SERVE: Serve hot with plenty of sauce"
+  ],
+  chefTips: ["Scoring helps marinade penetrate", "Pat fish dry for crispy skin", "Tilapia is traditional"],
+  pairingSuggestions: ["Coconut rice", "Ugali", "Steamed vegetables"],
+  isFavorite: false,
+  tags: ["fish", "seafood", "coconut", "swahili", "kenyan"]
+},
+
+{
+  id: "stf006",
+  name: "Smokie Pasua (Split Sausage)",
+  category: "🇰🇪 Street Food",
+  image: "https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg",
+  prepTime: "5 min",
+  cookTime: "10 min",
+  servings: "2 people",
+  difficulty: "Easy",
+  equipment: ["Grill or pan", "Knife"],
+  ingredients: ["2 smokie sausages", "Kachumbari", "Mayonnaise", "Ketchup", "Chili sauce"],
+  instructions: [
+    "GRILL SMOKIES: Grill or fry until cooked and slightly CHARRED",
+    "SPLIT: Split each smokie lengthwise (don't cut all the way)",
+    "FILL: Stuff generously with Kachumbari",
+    "DRESS: Drizzle with mayonnaise, ketchup, and chili sauce",
+    "SERVE: Serve immediately"
+  ],
+  chefTips: ["Char smokies for smoky flavor", "Customize with your favorite sauces"],
+  pairingSuggestions: ["Cold soda", "Beer"],
+  isFavorite: false,
+  tags: ["street food", "snack", "quick", "kenyan"]
+},
+
+{
+  id: "stf007",
+  name: "Mayai Pasua (Boiled Eggs with Kachumbari)",
+  category: "🇰🇪 Street Food",
+  image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
+  prepTime: "5 min",
+  cookTime: "10 min",
+  servings: "2 people",
+  difficulty: "Easy",
+  equipment: ["Small pot", "Knife"],
+  ingredients: ["4 eggs", "Kachumbari", "Salt", "Black pepper", "Chili powder"],
+  instructions: [
+    "BOIL EGGS: Boil 8-10 minutes until HARD BOILED",
+    "COOL: Cool in cold water. Peel",
+    "HALVE: Cut each egg in half lengthwise",
+    "TOP: Top generously with Kachumbari",
+    "SEASON: Sprinkle with salt, pepper, and chili powder",
+    "SERVE: Serve as quick snack"
+  ],
+  chefTips: ["Room temperature eggs boil evenly", "Kachumbari should be fresh"],
+  pairingSuggestions: ["Hot sauce", "Cold drink"],
+  isFavorite: false,
+  tags: ["street food", "snack", "eggs", "quick", "kenyan"]
+}
 ];
